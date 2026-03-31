@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import {
   MapPin,
   Phone,
@@ -11,19 +10,36 @@ import {
 } from '@phosphor-icons/react'
 import { useLanguage } from '@/lib/LanguageContext'
 
+// ── Brand tokens (logo-aligned, bypass Spark overrides) ──────────────
+const C = {
+  primary:    '#0d3d4a',
+  accent:     '#c9a96e',
+  tealLight:  '#3a8a8a',
+  background: '#f5f0e8',
+  card:       '#faf7f2',
+  cardFg:     '#1a2e2e',
+  border:     '#c5d8d8',
+  mutedFg:    '#4a6a6a',
+  cream:      '#f5e6c8',
+  headerGrad: 'linear-gradient(135deg, #0d3d4a 0%, #1a5568 50%, #3a8a8a 100%)',
+} as const
+
 export default function ContactPage() {
   const { t } = useLanguage()
 
   return (
-    <div className="min-h-screen bg-background py-16 px-4">
+    <div className="min-h-screen py-16 px-4" style={{ backgroundColor: C.background }}>
       <div className="container mx-auto max-w-6xl">
 
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="font-display text-5xl md:text-6xl font-bold text-primary mb-4">
+          <h1
+            className="font-display text-5xl md:text-6xl font-bold mb-4"
+            style={{ color: C.primary }}
+          >
             {t.contact.title}
           </h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl" style={{ color: C.mutedFg }}>
             {t.contact.subtitle}
           </p>
         </div>
@@ -31,168 +47,205 @@ export default function ContactPage() {
         <div className="grid md:grid-cols-2 gap-8 mb-12">
 
           {/* Location Card */}
-          <Card className="bg-card border border-border hover:border-teal-light hover:shadow-2xl transition-all">
-            <CardHeader className="ocean-gradient text-white rounded-t-lg">
-              <CardTitle className="font-display text-2xl flex items-center gap-3">
-                <MapPin size={32} weight="fill" className="text-accent" />
+          <Card
+            className="transition-all hover:shadow-2xl"
+            style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.tealLight)}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.border)}
+          >
+            <CardHeader className="rounded-t-lg" style={{ background: C.headerGrad }}>
+              <CardTitle
+                className="font-display text-2xl flex items-center gap-3"
+                style={{ color: C.cream }}
+              >
+                <MapPin size={32} weight="fill" style={{ color: C.accent }} />
                 {t.contact.location}
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-6">
-              <div className="space-y-4 text-lg text-foreground">
-                <p className="font-semibold text-primary">Restaurante Marisma</p>
-                <p className="text-muted-foreground">{t.contact.address}</p>
-                <p className="text-muted-foreground">{t.contact.city}</p>
-              </div>
+            <CardContent className="pt-6 space-y-4 text-lg">
+              <p className="font-semibold" style={{ color: C.primary }}>
+                Restaurante Marisma
+              </p>
+              <p style={{ color: C.mutedFg }}>{t.contact.address}</p>
+              <p style={{ color: C.mutedFg }}>{t.contact.city}</p>
             </CardContent>
           </Card>
 
           {/* Phone Card */}
-          <Card className="bg-card border border-border hover:border-teal-light hover:shadow-2xl transition-all">
-            <CardHeader className="ocean-gradient text-white rounded-t-lg">
-              <CardTitle className="font-display text-2xl flex items-center gap-3">
-                <Phone size={32} weight="fill" className="text-accent" />
+          <Card
+            className="transition-all hover:shadow-2xl"
+            style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.tealLight)}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.border)}
+          >
+            <CardHeader className="rounded-t-lg" style={{ background: C.headerGrad }}>
+              <CardTitle
+                className="font-display text-2xl flex items-center gap-3"
+                style={{ color: C.cream }}
+              >
+                <Phone size={32} weight="fill" style={{ color: C.accent }} />
                 {t.contact.phone}
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-6">
-              <div className="space-y-4">
-                <div>
-                  <a
-                    href="tel:+573001234567"
-                    className="text-xl text-teal-light hover:text-primary transition-colors"
-                  >
-                    (+57) 300 123 4567
-                  </a>
-                </div>
-                <div>
-                  <p className="font-semibold text-primary text-lg mb-2">WhatsApp</p>
-                  <a
-                    href="https://wa.me/573001234567"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xl text-teal-light hover:text-primary transition-colors flex items-center gap-2"
-                  >
-                    <WhatsappLogo size={24} weight="fill" />
-                    (+57) 300 123 4567
-                  </a>
-                </div>
+            <CardContent className="pt-6 space-y-4">
+              <div>
+                <p className="text-sm mb-1" style={{ color: C.mutedFg }}>Teléfono</p>
+                <a
+                  href="tel:+573001234567"
+                  className="text-xl font-semibold transition-colors"
+                  style={{ color: C.tealLight }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = C.primary)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = C.tealLight)}
+                >
+                  (+57) 300 123 4567
+                </a>
+              </div>
+              <div>
+                <p className="text-sm mb-1" style={{ color: C.mutedFg }}>WhatsApp</p>
+                <a
+                  href="https://wa.me/573001234567"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xl font-semibold transition-colors flex items-center gap-2"
+                  style={{ color: C.tealLight }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = C.primary)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = C.tealLight)}
+                >
+                  <WhatsappLogo size={24} weight="fill" />
+                  (+57) 300 123 4567
+                </a>
               </div>
             </CardContent>
           </Card>
 
           {/* Hours Card */}
-          <Card className="bg-card border border-border hover:border-teal-light hover:shadow-2xl transition-all">
-            <CardHeader className="ocean-gradient text-white rounded-t-lg">
-              <CardTitle className="font-display text-2xl flex items-center gap-3">
-                <Clock size={32} weight="fill" className="text-accent" />
+          <Card
+            className="transition-all hover:shadow-2xl"
+            style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.tealLight)}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.border)}
+          >
+            <CardHeader className="rounded-t-lg" style={{ background: C.headerGrad }}>
+              <CardTitle
+                className="font-display text-2xl flex items-center gap-3"
+                style={{ color: C.cream }}
+              >
+                <Clock size={32} weight="fill" style={{ color: C.accent }} />
                 {t.contact.hours}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6">
-              <div className="space-y-3 text-foreground">
-                <div className="flex justify-between items-center pb-2 border-b border-border">
-                  <span className="font-semibold text-primary">{t.home.monThu}</span>
-                  <span className="text-muted-foreground">11:00 AM - 9:00 PM</span>
-                </div>
-                <div className="flex justify-between items-center pb-2 border-b border-border">
-                  <span className="font-semibold text-primary">{t.home.friSat}</span>
-                  <span className="text-muted-foreground">11:00 AM - 10:00 PM</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold text-primary">{t.home.sunday}</span>
-                  <span className="text-muted-foreground">11:00 AM - 8:00 PM</span>
-                </div>
+              <div className="space-y-3">
+                {[
+                  { label: t.home.monThu, hours: '11:00 AM - 9:00 PM',  border: true },
+                  { label: t.home.friSat, hours: '11:00 AM - 10:00 PM', border: true },
+                  { label: t.home.sunday, hours: '11:00 AM - 8:00 PM',  border: false },
+                ].map(({ label, hours, border }) => (
+                  <div
+                    key={label}
+                    className="flex justify-between items-center pb-2"
+                    style={border ? { borderBottom: `1px solid ${C.border}` } : {}}
+                  >
+                    <span className="font-semibold" style={{ color: C.primary }}>{label}</span>
+                    <span className="text-sm"       style={{ color: C.mutedFg }}>{hours}</span>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
 
           {/* Email Card */}
-          <Card className="bg-card border border-border hover:border-teal-light hover:shadow-2xl transition-all">
-            <CardHeader className="ocean-gradient text-white rounded-t-lg">
-              <CardTitle className="font-display text-2xl flex items-center gap-3">
-                <EnvelopeSimple size={32} weight="fill" className="text-accent" />
+          <Card
+            className="transition-all hover:shadow-2xl"
+            style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.tealLight)}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.border)}
+          >
+            <CardHeader className="rounded-t-lg" style={{ background: C.headerGrad }}>
+              <CardTitle
+                className="font-display text-2xl flex items-center gap-3"
+                style={{ color: C.cream }}
+              >
+                <EnvelopeSimple size={32} weight="fill" style={{ color: C.accent }} />
                 {t.contact.email}
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-6">
-              <div className="space-y-4">
-                <div>
+            <CardContent className="pt-6 space-y-4">
+              {['info@marisma.com', 'reservas@marisma.com'].map((mail) => (
+                <div key={mail}>
                   <a
-                    href="mailto:info@marisma.com"
-                    className="text-xl text-teal-light hover:text-primary transition-colors"
+                    href={`mailto:${mail}`}
+                    className="text-xl font-semibold transition-colors"
+                    style={{ color: C.tealLight }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = C.primary)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = C.tealLight)}
                   >
-                    info@marisma.com
+                    {mail}
                   </a>
                 </div>
-                <div>
-                  <a
-                    href="mailto:reservas@marisma.com"
-                    className="text-xl text-teal-light hover:text-primary transition-colors"
-                  >
-                    reservas@marisma.com
-                  </a>
-                </div>
-              </div>
+              ))}
             </CardContent>
           </Card>
+
         </div>
 
         {/* Social Media Card */}
-        <Card className="bg-card border-2 border-accent/30 shadow-2xl">
-          <CardHeader className="ocean-gradient text-white text-center rounded-t-lg">
-            <CardTitle className="font-display text-3xl">{t.contact.followUs}</CardTitle>
+        <Card
+          className="shadow-2xl"
+          style={{
+            backgroundColor: C.card,
+            border:          `2px solid rgba(201,169,110,0.40)`,
+          }}
+        >
+          <CardHeader
+            className="text-center rounded-t-lg"
+            style={{ background: C.headerGrad }}
+          >
+            <CardTitle
+              className="font-display text-3xl"
+              style={{ color: C.cream }}
+            >
+              {t.contact.followUs}
+            </CardTitle>
           </CardHeader>
           <CardContent className="pt-8">
             <div className="flex flex-wrap justify-center gap-6">
 
-              {/* Instagram — kept brand colors per platform identity */}
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white gap-3 px-8"
-                asChild
+              {/* Instagram — platform brand colors */}
+              <a
+                href="https://instagram.com/marisma_yopal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-8 py-3 rounded-md text-white font-display font-semibold text-lg transition-opacity hover:opacity-90 shadow-md"
+                style={{ background: 'linear-gradient(135deg, #e1306c, #833ab4)' }}
               >
-                <a
-                  href="https://instagram.com/marisma_yopal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <InstagramLogo size={24} weight="fill" />
-                  Instagram
-                </a>
-              </Button>
+                <InstagramLogo size={24} weight="fill" />
+                Instagram
+              </a>
 
-              {/* Facebook — kept brand colors per platform identity */}
-              <Button
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white gap-3 px-8"
-                asChild
+              {/* Facebook — platform brand colors */}
+              <a
+                href="https://facebook.com/marisma.yopal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-8 py-3 rounded-md text-white font-display font-semibold text-lg transition-opacity hover:opacity-90 shadow-md"
+                style={{ backgroundColor: '#1877f2' }}
               >
-                <a
-                  href="https://facebook.com/marisma.yopal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FacebookLogo size={24} weight="fill" />
-                  Facebook
-                </a>
-              </Button>
+                <FacebookLogo size={24} weight="fill" />
+                Facebook
+              </a>
 
-              {/* WhatsApp CTA — Marisma accent gold as primary CTA */}
-              <Button
-                size="lg"
-                className="bg-accent text-accent-foreground hover:opacity-90 gap-3 px-8"
-                asChild
+              {/* WhatsApp CTA — Marisma warm gold as primary CTA */}
+              <a
+                href="https://wa.me/573001234567"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-8 py-3 rounded-md font-display font-semibold text-lg transition-opacity hover:opacity-90 shadow-md"
+                style={{ backgroundColor: C.accent, color: '#1a1a0e' }}
               >
-                <a
-                  href="https://wa.me/573001234567"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <WhatsappLogo size={24} weight="fill" />
-                  WhatsApp
-                </a>
-              </Button>
+                <WhatsappLogo size={24} weight="fill" />
+                WhatsApp
+              </a>
 
             </div>
           </CardContent>

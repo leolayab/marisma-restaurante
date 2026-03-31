@@ -32,6 +32,22 @@ interface Reservation {
   createdAt: string
 }
 
+// ── Brand tokens (logo-aligned, bypass Spark overrides) ──────────────
+const C = {
+  primary:        '#0d3d4a',
+  accent:         '#c9a96e',
+  tealLight:      '#3a8a8a',
+  background:     '#f5f0e8',
+  card:           '#faf7f2',
+  cardFg:         '#1a2e2e',
+  border:         '#c5d8d8',
+  mutedBg:        '#e8f0f0',
+  mutedFg:        '#4a6a6a',
+  cream:          '#f5e6c8',
+  headerGrad:     'linear-gradient(135deg, #0d3d4a 0%, #1a5568 50%, #3a8a8a 100%)',
+  separator:      'rgba(58,138,138,0.25)',
+} as const
+
 export default function ReservationsPage() {
   const { t, language } = useLanguage()
   const [reservations, setReservations] = useKV<Reservation[]>('reservations', [])
@@ -47,67 +63,75 @@ export default function ReservationsPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-
     if (!name || !phone || !date || !time || !guests) {
       toast.error(t.reservations.error)
       return
     }
-
     const newReservation: Reservation = {
       id: Date.now().toString(),
-      name,
-      phone,
-      email,
+      name, phone, email,
       date: format(date, 'yyyy-MM-dd'),
-      time,
-      guests,
-      notes,
+      time, guests, notes,
       createdAt: new Date().toISOString(),
     }
-
     setReservations((current) => [...(current || []), newReservation])
     toast.success(t.reservations.success)
-
-    setName('')
-    setPhone('')
-    setEmail('')
-    setDate(undefined)
-    setTime('')
-    setGuests('')
-    setNotes('')
+    setName(''); setPhone(''); setEmail('')
+    setDate(undefined); setTime(''); setGuests(''); setNotes('')
   }
 
   return (
-    <div className="min-h-screen bg-background py-16 px-4">
+    <div className="min-h-screen py-16 px-4" style={{ backgroundColor: C.background }}>
       <div className="container mx-auto max-w-4xl">
 
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="font-display text-5xl md:text-6xl font-bold text-primary mb-4">
+          <h1
+            className="font-display text-5xl md:text-6xl font-bold mb-4"
+            style={{ color: C.primary }}
+          >
             {t.reservations.title}
           </h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl" style={{ color: C.mutedFg }}>
             {t.reservations.subtitle}
           </p>
         </div>
 
         {/* Reservation Form Card */}
-        <Card className="shadow-2xl border border-border hover:border-teal-light transition-all">
-          <CardHeader className="ocean-gradient text-white rounded-t-lg">
-            <CardTitle className="font-display text-3xl">
+        <Card
+          className="shadow-2xl transition-all"
+          style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}
+        >
+          {/* Card Header — ocean gradient */}
+          <CardHeader
+            className="rounded-t-lg"
+            style={{ background: C.headerGrad }}
+          >
+            <CardTitle
+              className="font-display text-3xl"
+              style={{ color: C.cream }}
+            >
               {t.reservations.title}
             </CardTitle>
-            <CardDescription className="text-primary-foreground/90 text-base">
+            <CardDescription
+              className="text-base"
+              style={{ color: 'rgba(245,230,200,0.90)' }}
+            >
               {t.reservations.subtitle}
             </CardDescription>
           </CardHeader>
+
           <CardContent className="pt-6">
             <form onSubmit={handleSubmit} className="space-y-6">
 
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Name */}
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="font-display text-primary font-semibold">
+                  <Label
+                    htmlFor="name"
+                    className="font-display font-semibold"
+                    style={{ color: C.primary }}
+                  >
                     {t.reservations.name} *
                   </Label>
                   <Input
@@ -116,13 +140,23 @@ export default function ReservationsPage() {
                     onChange={(e) => setName(e.target.value)}
                     placeholder={t.reservations.namePlaceholder}
                     required
-                    className="border-2 border-input bg-muted focus:border-accent focus-visible:ring-accent"
+                    style={{
+                      backgroundColor: C.mutedBg,
+                      border:          `2px solid ${C.border}`,
+                      color:           C.cardFg,
+                    }}
+                    onFocus={(e) => e.target.style.borderColor = C.accent}
+                    onBlur={(e)  => e.target.style.borderColor = C.border}
                   />
                 </div>
 
                 {/* Phone */}
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="font-display text-primary font-semibold">
+                  <Label
+                    htmlFor="phone"
+                    className="font-display font-semibold"
+                    style={{ color: C.primary }}
+                  >
                     {t.reservations.phone} *
                   </Label>
                   <Input
@@ -132,14 +166,24 @@ export default function ReservationsPage() {
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder={t.reservations.phonePlaceholder}
                     required
-                    className="border-2 border-input bg-muted focus:border-accent focus-visible:ring-accent"
+                    style={{
+                      backgroundColor: C.mutedBg,
+                      border:          `2px solid ${C.border}`,
+                      color:           C.cardFg,
+                    }}
+                    onFocus={(e) => e.target.style.borderColor = C.accent}
+                    onBlur={(e)  => e.target.style.borderColor = C.border}
                   />
                 </div>
               </div>
 
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="font-display text-primary font-semibold">
+                <Label
+                  htmlFor="email"
+                  className="font-display font-semibold"
+                  style={{ color: C.primary }}
+                >
                   {t.reservations.email}
                 </Label>
                 <Input
@@ -148,38 +192,63 @@ export default function ReservationsPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t.reservations.emailPlaceholder}
-                  className="border-2 border-input bg-muted focus:border-accent focus-visible:ring-accent"
+                  style={{
+                    backgroundColor: C.mutedBg,
+                    border:          `2px solid ${C.border}`,
+                    color:           C.cardFg,
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = C.accent}
+                  onBlur={(e)  => e.target.style.borderColor = C.border}
                 />
               </div>
 
               <div className="grid md:grid-cols-3 gap-6">
                 {/* Date Picker */}
                 <div className="space-y-2">
-                  <Label className="font-display text-primary font-semibold">
+                  <Label
+                    className="font-display font-semibold"
+                    style={{ color: C.primary }}
+                  >
                     {t.reservations.date} *
                   </Label>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="w-full justify-start text-left font-body font-normal border-2 border-input bg-muted hover:border-accent hover:bg-muted"
+                      <button
+                        type="button"
+                        className="w-full flex items-center justify-start px-3 py-2 rounded-md text-left font-body text-sm transition-colors"
+                        style={{
+                          backgroundColor: C.mutedBg,
+                          border:          `2px solid ${C.border}`,
+                          color:           date ? C.cardFg : C.mutedFg,
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.accent)}
+                        onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.border)}
                       >
-                        <CalendarBlank className="mr-2 h-4 w-4 text-teal-light" />
+                        <CalendarBlank
+                          className="mr-2 h-4 w-4"
+                          style={{ color: C.tealLight }}
+                        />
                         {date
                           ? format(date, 'PPP', { locale })
-                          : <span className="text-muted-foreground">{t.reservations.datePlaceholder}</span>
+                          : t.reservations.datePlaceholder
                         }
-                      </Button>
+                      </button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 border border-border bg-card">
+                    <PopoverContent
+                      className="w-auto p-0"
+                      style={{
+                        backgroundColor: C.card,
+                        border:          `1px solid ${C.border}`,
+                      }}
+                    >
                       <Calendar
                         mode="single"
                         selected={date}
                         onSelect={setDate}
-                        disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                        disabled={(d) => d < new Date(new Date().setHours(0,0,0,0))}
                         initialFocus
                         locale={locale}
-                        className="text-foreground"
+                        style={{ color: C.cardFg }}
                       />
                     </PopoverContent>
                   </Popover>
@@ -187,20 +256,38 @@ export default function ReservationsPage() {
 
                 {/* Time */}
                 <div className="space-y-2">
-                  <Label htmlFor="time" className="font-display text-primary font-semibold">
+                  <Label
+                    htmlFor="time"
+                    className="font-display font-semibold"
+                    style={{ color: C.primary }}
+                  >
                     {t.reservations.time} *
                   </Label>
-                  <Select value={time} onValueChange={setTime} required>
+                  <Select value={time} onValueChange={setTime}>
                     <SelectTrigger
                       id="time"
-                      className="border-2 border-input bg-muted focus:border-accent focus:ring-accent"
+                      style={{
+                        backgroundColor: C.mutedBg,
+                        border:          `2px solid ${C.border}`,
+                        color:           C.cardFg,
+                      }}
                     >
                       <SelectValue placeholder={t.reservations.timePlaceholder} />
                     </SelectTrigger>
-                    <SelectContent className="bg-card border border-border">
+                    <SelectContent
+                      style={{
+                        backgroundColor: C.card,
+                        border:          `1px solid ${C.border}`,
+                        color:           C.cardFg,
+                      }}
+                    >
                       {['11:00','12:00','13:00','14:00','15:00',
                         '16:00','17:00','18:00','19:00','20:00','21:00'].map((h) => (
-                        <SelectItem key={h} value={h} className="font-body focus:bg-secondary focus:text-primary">
+                        <SelectItem
+                          key={h} value={h}
+                          className="font-body"
+                          style={{ color: C.cardFg }}
+                        >
                           {parseInt(h) <= 12
                             ? `${parseInt(h)}:00 ${parseInt(h) === 12 ? 'PM' : 'AM'}`
                             : `${parseInt(h) - 12}:00 PM`}
@@ -212,23 +299,45 @@ export default function ReservationsPage() {
 
                 {/* Guests */}
                 <div className="space-y-2">
-                  <Label htmlFor="guests" className="font-display text-primary font-semibold">
+                  <Label
+                    htmlFor="guests"
+                    className="font-display font-semibold"
+                    style={{ color: C.primary }}
+                  >
                     {t.reservations.guests} *
                   </Label>
-                  <Select value={guests} onValueChange={setGuests} required>
+                  <Select value={guests} onValueChange={setGuests}>
                     <SelectTrigger
                       id="guests"
-                      className="border-2 border-input bg-muted focus:border-accent focus:ring-accent"
+                      style={{
+                        backgroundColor: C.mutedBg,
+                        border:          `2px solid ${C.border}`,
+                        color:           C.cardFg,
+                      }}
                     >
                       <SelectValue placeholder={t.reservations.guestsPlaceholder} />
                     </SelectTrigger>
-                    <SelectContent className="bg-card border border-border">
+                    <SelectContent
+                      style={{
+                        backgroundColor: C.card,
+                        border:          `1px solid ${C.border}`,
+                        color:           C.cardFg,
+                      }}
+                    >
                       {['1','2','3','4','5','6','7'].map((n) => (
-                        <SelectItem key={n} value={n} className="font-body focus:bg-secondary focus:text-primary">
+                        <SelectItem
+                          key={n} value={n}
+                          className="font-body"
+                          style={{ color: C.cardFg }}
+                        >
                           {n}
                         </SelectItem>
                       ))}
-                      <SelectItem value="8" className="font-body focus:bg-secondary focus:text-primary">
+                      <SelectItem
+                        value="8"
+                        className="font-body"
+                        style={{ color: C.cardFg }}
+                      >
                         8+
                       </SelectItem>
                     </SelectContent>
@@ -238,7 +347,11 @@ export default function ReservationsPage() {
 
               {/* Notes */}
               <div className="space-y-2">
-                <Label htmlFor="notes" className="font-display text-primary font-semibold">
+                <Label
+                  htmlFor="notes"
+                  className="font-display font-semibold"
+                  style={{ color: C.primary }}
+                >
                   {t.reservations.specialRequests}
                 </Label>
                 <Textarea
@@ -247,18 +360,28 @@ export default function ReservationsPage() {
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder={t.reservations.specialRequestsPlaceholder}
                   rows={4}
-                  className="border-2 border-input bg-muted focus:border-accent focus-visible:ring-accent font-body"
+                  className="font-body"
+                  style={{
+                    backgroundColor: C.mutedBg,
+                    border:          `2px solid ${C.border}`,
+                    color:           C.cardFg,
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = C.accent}
+                  onBlur={(e)  => e.target.style.borderColor = C.border}
                 />
               </div>
 
-              {/* Submit CTA - Warm Gold per guide */}
-              <Button
+              {/* Submit CTA — Warm Gold */}
+              <button
                 type="submit"
-                size="lg"
-                className="w-full bg-accent text-accent-foreground hover:bg-accent/90 text-lg py-6 font-display font-semibold shadow-lg"
+                className="w-full text-lg py-4 font-display font-semibold rounded-md shadow-lg transition-opacity hover:opacity-90"
+                style={{
+                  backgroundColor: C.accent,
+                  color:           '#1a1a0e',
+                }}
               >
                 {t.reservations.submit}
-              </Button>
+              </button>
 
             </form>
           </CardContent>
@@ -268,58 +391,75 @@ export default function ReservationsPage() {
         <div className="mt-12 grid md:grid-cols-2 gap-6">
 
           {/* Hours Card */}
-          <Card className="bg-card border border-border hover:border-teal-light hover:shadow-2xl transition-all">
-            <CardHeader className="ocean-gradient text-white rounded-t-lg">
-              <CardTitle className="font-display text-xl flex items-center gap-3">
-                <Clock size={24} weight="fill" className="text-accent" />
+          <Card
+            className="transition-all hover:shadow-2xl"
+            style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.tealLight)}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.border)}
+          >
+            <CardHeader className="rounded-t-lg" style={{ background: C.headerGrad }}>
+              <CardTitle
+                className="font-display text-xl flex items-center gap-3"
+                style={{ color: C.cream }}
+              >
+                <Clock size={24} weight="fill" style={{ color: C.accent }} />
                 {t.contact.hours}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-4 space-y-3">
-              <div className="flex justify-between items-center border-b border-border pb-2">
-                <span className="font-semibold text-primary">{t.home.monThu}</span>
-                <span className="text-muted-foreground text-sm">11:00 AM – 9:00 PM</span>
-              </div>
-              <div className="flex justify-between items-center border-b border-border pb-2">
-                <span className="font-semibold text-primary">{t.home.friSat}</span>
-                <span className="text-muted-foreground text-sm">11:00 AM – 10:00 PM</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-primary">{t.home.sunday}</span>
-                <span className="text-muted-foreground text-sm">11:00 AM – 8:00 PM</span>
-              </div>
+              {[
+                { label: t.home.monThu, hours: '11:00 AM – 9:00 PM',  border: true },
+                { label: t.home.friSat, hours: '11:00 AM – 10:00 PM', border: true },
+                { label: t.home.sunday, hours: '11:00 AM – 8:00 PM',  border: false },
+              ].map(({ label, hours, border }) => (
+                <div
+                  key={label}
+                  className="flex justify-between items-center pb-2"
+                  style={border ? { borderBottom: `1px solid ${C.border}` } : {}}
+                >
+                  <span className="font-semibold" style={{ color: C.primary }}>{label}</span>
+                  <span className="text-sm"      style={{ color: C.mutedFg }}>{hours}</span>
+                </div>
+              ))}
             </CardContent>
           </Card>
 
           {/* Phone Card */}
-          <Card className="bg-card border border-border hover:border-teal-light hover:shadow-2xl transition-all">
-            <CardHeader className="ocean-gradient text-white rounded-t-lg">
-              <CardTitle className="font-display text-xl flex items-center gap-3">
-                <Phone size={24} weight="fill" className="text-accent" />
+          <Card
+            className="transition-all hover:shadow-2xl"
+            style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.tealLight)}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.border)}
+          >
+            <CardHeader className="rounded-t-lg" style={{ background: C.headerGrad }}>
+              <CardTitle
+                className="font-display text-xl flex items-center gap-3"
+                style={{ color: C.cream }}
+              >
+                <Phone size={24} weight="fill" style={{ color: C.accent }} />
                 {t.contact.phone}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-4 space-y-3">
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Teléfono</p>
-                <a
-                  href="tel:+573001234567"
-                  className="text-lg text-teal-light hover:text-primary transition-colors font-semibold"
-                >
-                  (+57) 300 123 4567
-                </a>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">WhatsApp</p>
-                <a
-                  href="https://wa.me/573001234567"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-lg text-teal-light hover:text-primary transition-colors font-semibold"
-                >
-                  (+57) 300 123 4567
-                </a>
-              </div>
+              {[
+                { label: 'Teléfono', href: 'tel:+573001234567' },
+                { label: 'WhatsApp', href: 'https://wa.me/573001234567', external: true },
+              ].map(({ label, href, external }) => (
+                <div key={label}>
+                  <p className="text-sm mb-1" style={{ color: C.mutedFg }}>{label}</p>
+                  <a
+                    href={href}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noopener noreferrer' : undefined}
+                    className="text-lg font-semibold transition-colors"
+                    style={{ color: C.tealLight }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = C.primary)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = C.tealLight)}
+                  >
+                    (+57) 300 123 4567
+                  </a>
+                </div>
+              ))}
             </CardContent>
           </Card>
 

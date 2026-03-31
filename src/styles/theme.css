@@ -259,4 +259,125 @@
     --color-bg-inset: #000000;
     --color-bg-overlay: var(--color-neutral-3);
   }
+
+  /* Marisma Brand Colors — logo aligned */
+  #spark-app {
+    --color-primary:                   #0d3d4a;
+    --color-primary-foreground:        #f5e6c8;
+    --color-teal-light:                #3a8a8a;
+    --color-teal-light-foreground:     #f5e6c8;
+    --color-marisma-accent:            #c9a96e;
+    --color-marisma-accent-foreground: #1a1a0e;
+    --color-sunset:                    #e8743a;
+    --color-sunset-foreground:         #f5e6c8;
+    --color-sky-gold:                  #f0c060;
+    --color-sky-gold-foreground:       #1a1a0e;
+    --color-mangrove-green:            #4a7c3f;
+    --color-mangrove-green-foreground: #f5e6c8;
+    --color-background:                #f5f0e8;
+    --color-foreground:                #1a2e2e;
+    --color-card:                      #faf7f2;
+    --color-card-foreground:           #1a2e2e;
+    --color-secondary:                 #d6eaea;
+    --color-secondary-foreground:      #0d3d4a;
+    --color-muted:                     #e8f0f0;
+    --color-muted-foreground:          #4a6a6a;
+    --color-border:                    #c5d8d8;
+    --color-input:                     #d6e8e8;
+    --color-ring:                      #c9a96e;
+
+    /* Override Spark accent → Marisma warm gold */
+    --color-accent-1:        #fdf8f0;
+    --color-accent-2:        #f9f0e0;
+    --color-accent-3:        #f2e0c0;
+    --color-accent-4:        #ecd0a0;
+    --color-accent-5:        #e5c080;
+    --color-accent-6:        #ddb060;
+    --color-accent-7:        #d4a050;
+    --color-accent-8:        #c9a96e;
+    --color-accent-9:        #c9a96e;
+    --color-accent-10:       #b8944a;
+    --color-accent-11:       #8a6a28;
+    --color-accent-12:       #4a3810;
+    --color-accent-contrast: #1a1a0e;
+  }
+
+  #spark-app.dark-theme {
+    --color-bg:     var(--color-neutral-1);
+    --color-bg-inset:   #000000;
+    --color-bg-overlay: var(--color-neutral-3);
+
+    /* Marisma Dark Mode overrides */
+    --color-primary:             #3a8a8a;
+    --color-primary-foreground:  #f5e6c8;
+    --color-teal-light:          #5aadad;
+    --color-teal-light-foreground: #0a2830;
+    --color-background:          #0a2830;
+    --color-foreground:          #f5e6c8;
+    --color-card:                #0f3340;
+    --color-card-foreground:     #f5e6c8;
+    --color-secondary:           #1a4a55;
+    --color-secondary-foreground:#f5e6c8;
+    --color-muted:               #1a3d48;
+    --color-muted-foreground:    #8ab8b8;
+    --color-border:              rgba(255,255,255,0.10);
+    --color-input:               rgba(255,255,255,0.08);
+  }
+}
+
+/* ── Gradient & Pattern Utilities — MUST be outside @layer base ────── */
+@layer utilities {
+  /* Deep teal → mid teal: matches logo dark background */
+  .ocean-gradient {
+    background: linear-gradient(
+      135deg,
+      #0d3d4a 0%,
+      #1a5568 50%,
+      #3a8a8a 100%
+    ) !important;
+  }
+
+  /* Water teal → sunset orange → sky gold */
+  .sunset-gradient {
+    background: linear-gradient(
+      180deg,
+      #3a8a8a 0%,
+      #e8743a 50%,
+      #f0c060 100%
+    );
+  }
+
+  /* Mirrors the logo emblem radial palette */
+  .logo-gradient {
+    background: radial-gradient(
+      circle at center,
+      #f0c060 0%,
+      #e8743a 35%,
+      #3a8a8a 65%,
+      #0d3d4a 100%
+    );
+  }
+
+  /* Subtle teal diagonal texture */
+  .wave-pattern {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(58, 138, 138, 0.06) 10px,
+      rgba(58, 138, 138, 0.06) 20px
+    );
+  }
+
+  .animate-wave {
+    animation: wave 8s ease-in-out infinite;
+  }
+
+  .font-display {
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .font-body {
+    font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  }
 }

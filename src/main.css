@@ -1,23 +1,11 @@
 @import 'tailwindcss';
-
 @import './styles/theme.css';
 @import './index.css';
 @import "tw-animate-css";
-/*
-  ---break---
-*/
-@custom-variant dark (&:is(.dark *));
 
+@custom-variant dark (&:is(.dark *));
 @config '../tailwind.config.js';
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -28,191 +16,196 @@
   }
 }
 
-/*
-  ---break---
-*/
 :root {
   --radius: 0.625rem;
 
-  /* Marisma Brand - Light Mode */
-  --background: oklch(0.98 0.01 200);
-  --foreground: oklch(0.20 0.03 200);
-  --card: oklch(0.98 0.01 200);
-  --card-foreground: oklch(0.20 0.03 200);
-  --popover: oklch(0.98 0.01 200);
-  --popover-foreground: oklch(0.20 0.03 200);
-  --primary: oklch(0.38 0.08 200);
-  --primary-foreground: oklch(0.98 0.01 200);
-  --secondary: oklch(0.88 0.04 200);
-  --secondary-foreground: oklch(0.38 0.08 200);
-  --muted: oklch(0.93 0.02 200);
-  --muted-foreground: oklch(0.50 0.05 200);
-  --accent: oklch(0.72 0.12 65);
-  --accent-foreground: oklch(0.15 0.02 65);
+  /* Deep teal — logo background */
+  --primary:            #0d3d4a;
+  --primary-foreground: #f5e6c8;
+
+  /* Cream page background */
+  --background:         #f5f0e8;
+  --foreground:         #1a2e2e;
+
+  /* White-cream cards */
+  --card:               #faf7f2;
+  --card-foreground:    #1a2e2e;
+  --popover:            #faf7f2;
+  --popover-foreground: #1a2e2e;
+
+  /* Soft aqua sections */
+  --secondary:            #d6eaea;
+  --secondary-foreground: #0d3d4a;
+
+  /* Muted inputs / disabled */
+  --muted:            #e8f0f0;
+  --muted-foreground: #4a6a6a;
+
+  /* Warm gold — CTA / prices / active */
+  --accent:            #c9a96e;
+  --accent-foreground: #1a1a0e;
+
+  /* Focus ring — gold */
+  --ring:   #c9a96e;
+
+  /* Borders / inputs */
+  --border: #c5d8d8;
+  --input:  #d6e8e8;
+
+  /* Destructive */
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.88 0.04 200);
-  --input: oklch(0.88 0.04 200);
-  --ring: oklch(0.72 0.12 65);
 
-  /* Marisma Extra Brand Tokens */
-  --teal-light: oklch(0.65 0.10 195);
-  --teal-light-foreground: oklch(0.15 0.05 195);
-  --sunset: oklch(0.68 0.15 45);
-  --sunset-foreground: oklch(0.15 0.05 45);
+  /* Extra Brand Tokens */
+  --teal-light:            #3a8a8a;
+  --teal-light-foreground: #f5e6c8;
+  --sunset:                #e8743a;
+  --sunset-foreground:     #f5e6c8;
+  --sky-gold:              #f0c060;
+  --sky-gold-foreground:   #1a1a0e;
+  --mangrove-green:            #4a7c3f;
+  --mangrove-green-foreground: #f5e6c8;
 
   /* Charts */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-1: #e8743a;
+  --chart-2: #3a8a8a;
+  --chart-3: #0d3d4a;
+  --chart-4: #c9a96e;
+  --chart-5: #f0c060;
 
-  /* Sidebar - Marisma teal tones */
-  --sidebar: oklch(0.38 0.08 200);
-  --sidebar-foreground: oklch(0.98 0.01 200);
-  --sidebar-primary: oklch(0.72 0.12 65);
-  --sidebar-primary-foreground: oklch(0.15 0.02 65);
-  --sidebar-accent: oklch(0.50 0.09 197);
-  --sidebar-accent-foreground: oklch(0.98 0.01 200);
-  --sidebar-border: oklch(0.50 0.09 197);
-  --sidebar-ring: oklch(0.72 0.12 65);
+  /* Sidebar */
+  --sidebar:                    #0d3d4a;
+  --sidebar-foreground:         #f5e6c8;
+  --sidebar-primary:            #c9a96e;
+  --sidebar-primary-foreground: #1a1a0e;
+  --sidebar-accent:             #1a5568;
+  --sidebar-accent-foreground:  #f5e6c8;
+  --sidebar-border:             #1a5568;
+  --sidebar-ring:               #c9a96e;
 }
 
-/*
-  ---break---
-*/
 .dark {
-  /* Marisma Brand - Dark Mode */
-  --background: oklch(0.15 0.03 200);
-  --foreground: oklch(0.93 0.02 200);
-  --card: oklch(0.20 0.04 200);
-  --card-foreground: oklch(0.93 0.02 200);
-  --popover: oklch(0.20 0.04 200);
-  --popover-foreground: oklch(0.93 0.02 200);
-  --primary: oklch(0.65 0.10 195);
-  --primary-foreground: oklch(0.15 0.03 200);
-  --secondary: oklch(0.25 0.05 200);
-  --secondary-foreground: oklch(0.93 0.02 200);
-  --muted: oklch(0.25 0.04 200);
-  --muted-foreground: oklch(0.65 0.05 200);
-  --accent: oklch(0.72 0.12 65);
-  --accent-foreground: oklch(0.15 0.02 65);
+  /* ── Marisma Brand — Dark Mode ───────────────────────────────────── */
+  --primary:            #3a8a8a;
+  --primary-foreground: #f5e6c8;
+
+  --background:         #0a2830;
+  --foreground:         #f5e6c8;
+
+  --card:               #0f3340;
+  --card-foreground:    #f5e6c8;
+  --popover:            #0f3340;
+  --popover-foreground: #f5e6c8;
+
+  --secondary:            #1a4a55;
+  --secondary-foreground: #f5e6c8;
+
+  --muted:            #1a3d48;
+  --muted-foreground: #8ab8b8;
+
+  --accent:            #c9a96e;
+  --accent-foreground: #1a1a0e;
+
+  --ring:   #c9a96e;
+  --border: rgba(255,255,255,0.10);
+  --input:  rgba(255,255,255,0.08);
+
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.72 0.12 65);
 
-  /* Marisma Extra Brand Tokens - Dark */
-  --teal-light: oklch(0.55 0.09 195);
-  --teal-light-foreground: oklch(0.93 0.02 200);
-  --sunset: oklch(0.68 0.15 45);
-  --sunset-foreground: oklch(0.15 0.05 45);
+  --teal-light:            #5aadad;
+  --teal-light-foreground: #0a2830;
 
-  /* Charts */
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  --sunset:            #e8743a;
+  --sunset-foreground: #f5e6c8;
 
-  /* Sidebar - Dark */
-  --sidebar: oklch(0.20 0.04 200);
-  --sidebar-foreground: oklch(0.93 0.02 200);
-  --sidebar-primary: oklch(0.72 0.12 65);
-  --sidebar-primary-foreground: oklch(0.15 0.02 65);
-  --sidebar-accent: oklch(0.25 0.05 200);
-  --sidebar-accent-foreground: oklch(0.93 0.02 200);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.72 0.12 65);
+  --sky-gold:            #f0c060;
+  --sky-gold-foreground: #1a1a0e;
+
+  --mangrove-green:            #6aaa5a;
+  --mangrove-green-foreground: #0a2830;
+
+  --chart-1: #e8743a;
+  --chart-2: #5aadad;
+  --chart-3: #f0c060;
+  --chart-4: #c9a96e;
+  --chart-5: #6aaa5a;
+
+  --sidebar:                   #0a2830;
+  --sidebar-foreground:        #f5e6c8;
+  --sidebar-primary:           #c9a96e;
+  --sidebar-primary-foreground:#1a1a0e;
+  --sidebar-accent:            #1a4a55;
+  --sidebar-accent-foreground: #f5e6c8;
+  --sidebar-border:            rgba(255,255,255,0.10);
+  --sidebar-ring:              #c9a96e;
 }
 
-/*
-  ---break---
-*/
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Core colors */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
+  --color-background:         var(--background);
+  --color-foreground:         var(--foreground);
+  --color-card:               var(--card);
+  --color-card-foreground:    var(--card-foreground);
+  --color-popover:            var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
+  --color-primary:            var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
+  --color-secondary:          var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-muted:              var(--muted);
+  --color-muted-foreground:   var(--muted-foreground);
+  --color-accent:             var(--accent);
+  --color-accent-foreground:  var(--accent-foreground);
+  --color-destructive:        var(--destructive);
+  --color-border:             var(--border);
+  --color-input:              var(--input);
+  --color-ring:               var(--ring);
 
-  /* Marisma Extra Brand Tokens */
-  --color-teal-light: var(--teal-light);
-  --color-teal-light-foreground: var(--teal-light-foreground);
-  --color-sunset: var(--sunset);
-  --color-sunset-foreground: var(--sunset-foreground);
+  --color-teal-light:             var(--teal-light);
+  --color-teal-light-foreground:  var(--teal-light-foreground);
+  --color-sunset:                 var(--sunset);
+  --color-sunset-foreground:      var(--sunset-foreground);
+  --color-sky-gold:               var(--sky-gold);
+  --color-sky-gold-foreground:    var(--sky-gold-foreground);
+  --color-mangrove-green:         var(--mangrove-green);
+  --color-mangrove-green-foreground: var(--mangrove-green-foreground);
 
-  /* Charts */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  /* Sidebar */
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar:                    var(--sidebar);
+  --color-sidebar-foreground:         var(--sidebar-foreground);
+  --color-sidebar-primary:            var(--sidebar-primary);
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-accent:             var(--sidebar-accent);
+  --color-sidebar-accent-foreground:  var(--sidebar-accent-foreground);
+  --color-sidebar-border:             var(--sidebar-border);
+  --color-sidebar-ring:               var(--sidebar-ring);
 
-  /* Animations */
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-wave: wave 8s ease-in-out infinite;
 
-  /*
-  ---break---
-*/
   @keyframes accordion-down {
     from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    to   { height: var(--radix-accordion-content-height); }
   }
-
-  /*
-  ---break---
-*/
   @keyframes accordion-up {
     from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    to   { height: 0; }
   }
-
-  /*
-  ---break---
-*/
   @keyframes wave {
-    0%, 100% { transform: translate(0px, 0px); }
-    25%       { transform: translate(4px, -4px); }
-    50%       { transform: translate(0px, -8px); }
-    75%       { transform: translate(-4px, -4px); }
+    0%, 100% { transform: translate(0px,  0px);  }
+    25%       { transform: translate(4px, -4px);  }
+    50%       { transform: translate(0px, -8px);  }
+    75%       { transform: translate(-4px,-4px);  }
   }
 }
 
-/*
-  ---break---
-*/
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -223,62 +216,64 @@
     font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
   }
 
+  /* Headings inside hero (on dark bg) stay white */
   h1, h2, h3, h4, h5, h6 {
     font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-    @apply text-primary;
+    color: var(--primary);
+  }
+
+  /* Hero section headings override — white on dark gradient */
+  .ocean-gradient h1,
+  .ocean-gradient h2,
+  .ocean-gradient h3 {
+    color: #ffffff !important;
   }
 }
 
-/*
-  ---break---
-*/
 @layer utilities {
+  /* Hero / section header — deep teal → water teal */
   .ocean-gradient {
     background: linear-gradient(
       135deg,
-      oklch(0.38 0.08 200) 0%,
-      oklch(0.50 0.09 197) 50%,
-      oklch(0.65 0.10 195) 100%
+      #0d3d4a 0%,
+      #1a5568 50%,
+      #3a8a8a 100%
     );
   }
 
+  /* Sunset sky — water teal → orange → gold */
   .sunset-gradient {
     background: linear-gradient(
       180deg,
-      oklch(0.65 0.10 195) 0%,
-      oklch(0.68 0.15 45)  50%,
-      oklch(0.72 0.12 65)  100%
+      #3a8a8a 0%,
+      #e8743a 50%,
+      #f0c060 100%
     );
   }
 
+  /* Logo radial — mirrors emblem palette */
   .logo-gradient {
     background: radial-gradient(
       circle at center,
-      oklch(0.65 0.10 195) 0%,
-      oklch(0.68 0.15 45)  50%,
-      oklch(0.38 0.08 200) 100%
+      #f0c060 0%,
+      #e8743a 35%,
+      #3a8a8a 65%,
+      #0d3d4a 100%
     );
   }
 
+  /* Subtle mangrove-root texture */
   .wave-pattern {
     background-image: repeating-linear-gradient(
       45deg,
       transparent,
       transparent 10px,
-      oklch(0.65 0.10 195 / 0.05) 10px,
-      oklch(0.65 0.10 195 / 0.05) 20px
+      rgba(58,138,138,0.06) 10px,
+      rgba(58,138,138,0.06) 20px
     );
   }
 
-  .animate-wave {
-    animation: wave 8s ease-in-out infinite;
-  }
-
-  .font-display {
-    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  }
-
-  .font-body {
-    font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
-  }
+  .animate-wave  { animation: wave 8s ease-in-out infinite; }
+  .font-display  { font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif; }
+  .font-body     { font-family: "Open Sans",  ui-sans-serif, system-ui, sans-serif; }
 }
