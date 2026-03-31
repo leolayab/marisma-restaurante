@@ -40,11 +40,6 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-3 hover:opacity-80 transition-opacity group"
           >
-            <img 
-              src="/logo.jpg" 
-              alt="Marisma Logo" 
-              className="h-10 w-10 object-contain group-hover:scale-105 transition-transform rounded-full"
-            />
             <div className="flex flex-col">
               <h1 className="font-display text-xl md:text-2xl font-bold leading-tight">Marisma</h1>
               <span className="text-xs text-accent font-light italic tracking-wide">Cocina de Mar</span>
