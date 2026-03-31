@@ -67,18 +67,19 @@ The design should evoke the feeling of a breezy coastal restaurant - fresh, eleg
 
 ## Color Selection
 
-The color scheme draws inspiration from the Colombian coast - the deep blues of the Caribbean, the white foam of waves, and the golden warmth of coastal sunsets.
+The color scheme is drawn directly from the Marisma logo, which features a majestic tree with roots in water, symbolizing the connection between land and sea. The palette includes deep teals representing the ocean depths, lighter teals for water and sky, and warm golden tones from the sunset - creating a harmonious blend of natural coastal elements.
 
-- **Primary Color**: Deep Ocean Blue (oklch(0.45 0.12 240)) - Represents the depth and richness of the ocean, used for headers, navigation, and key brand elements. This color communicates trust, quality, and the seafood heritage.
+- **Primary Color**: Deep Teal (oklch(0.38 0.08 200)) - Rich, sophisticated ocean color used for navigation, headers, and primary brand elements. This darker teal communicates depth, trust, and the restaurant's connection to coastal culinary traditions.
 - **Secondary Colors**: 
-  - Turquoise/Aqua (oklch(0.72 0.09 200)) - Bright, fresh water color for accents and highlights, suggesting freshness and coastal vibrancy
-  - Soft Sky Blue (oklch(0.85 0.05 220)) - Light background alternative for sections, providing airiness
-- **Accent Color**: Warm Gold (oklch(0.75 0.15 85)) - Elegant metallic accent for call-to-action buttons, borders, and special highlights, adding warmth and suggesting quality dining
+  - Light Teal (oklch(0.65 0.10 195)) - Brighter water color for accents, icons, and highlights, suggesting freshness and coastal vibrancy
+  - Soft Aqua (oklch(0.88 0.04 200)) - Very light teal for subtle backgrounds and hover states, providing airiness
+- **Accent Color**: Warm Gold (oklch(0.72 0.12 65)) - Rich golden tone inspired by sunset reflections in the logo, used for call-to-action buttons, active states, and special highlights. This warm accent creates visual interest and suggests premium quality.
+- **Supporting Accent**: Sunset Orange (oklch(0.68 0.15 45)) - Secondary warm tone from the logo's sunset, used sparingly for gradients and visual depth
 - **Foreground/Background Pairings**: 
-  - Deep Ocean Blue (oklch(0.45 0.12 240)): White text (oklch(0.98 0 0)) - Ratio 8.2:1 ✓
-  - Turquoise (oklch(0.72 0.09 200)): Deep Navy text (oklch(0.25 0.08 240)) - Ratio 6.1:1 ✓
-  - Warm Gold (oklch(0.75 0.15 85)): Deep Navy text (oklch(0.25 0.08 240)) - Ratio 5.8:1 ✓
-  - White Background (oklch(0.98 0 0)): Deep Ocean Blue text (oklch(0.45 0.12 240)) - Ratio 8.2:1 ✓
+  - Deep Teal (oklch(0.38 0.08 200)): White text (oklch(0.98 0 0)) - Ratio 11.2:1 ✓
+  - Light Teal (oklch(0.65 0.10 195)): Deep Teal text (oklch(0.38 0.08 200)) - Ratio 4.9:1 ✓
+  - Warm Gold (oklch(0.72 0.12 65)): White text (oklch(0.98 0 0)) - Ratio 4.6:1 ✓
+  - White Background (oklch(0.98 0 0)): Deep Teal text (oklch(0.38 0.08 200)) - Ratio 11.2:1 ✓
 
 ## Font Selection
 

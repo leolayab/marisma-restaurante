@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Fish, ForkKnife, Users, CalendarBlank, Images, Phone, List, Translate } from '@phosphor-icons/react'
+import { ForkKnife, Users, CalendarBlank, Images, Phone, List, Translate } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { useLanguage } from '@/lib/LanguageContext'
@@ -9,6 +9,62 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+
+const MarismaLogo = ({ className = "", size = 40 }: { className?: string; size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 200 200"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <circle cx="100" cy="100" r="95" fill="url(#logoGradient)" />
+    <circle cx="100" cy="100" r="92" fill="none" stroke="url(#goldGradient)" strokeWidth="3" />
+    
+    <ellipse cx="100" cy="75" rx="55" ry="15" fill="url(#waterGradient)" />
+    
+    <path
+      d="M100 45 L95 50 L90 48 L92 53 L87 55 L92 57 L90 62 L95 60 L100 65 L105 60 L110 62 L108 57 L113 55 L108 53 L110 48 L105 50 Z"
+      fill="url(#treeGradient)"
+    />
+    <rect x="98" y="50" width="4" height="20" fill="#654321" />
+    
+    <path
+      d="M100 120 L80 140 L85 145 L90 140 L95 145 L100 142 L105 145 L110 140 L115 145 L120 140 Z"
+      fill="url(#rootGradient)"
+    />
+    
+    <ellipse cx="145" cy="60" rx="8" ry="4" fill="url(#sunGradient)" />
+    
+    <defs>
+      <linearGradient id="logoGradient" x1="0" y1="0" x2="0" y2="200">
+        <stop offset="0%" stopColor="oklch(0.38 0.08 200)" />
+        <stop offset="100%" stopColor="oklch(0.28 0.08 200)" />
+      </linearGradient>
+      <linearGradient id="goldGradient" x1="0" y1="0" x2="200" y2="200">
+        <stop offset="0%" stopColor="oklch(0.72 0.12 65)" />
+        <stop offset="100%" stopColor="oklch(0.68 0.15 45)" />
+      </linearGradient>
+      <linearGradient id="waterGradient" x1="0" y1="0" x2="0" y2="100">
+        <stop offset="0%" stopColor="oklch(0.65 0.10 195 / 0.6)" />
+        <stop offset="100%" stopColor="oklch(0.55 0.09 197 / 0.8)" />
+      </linearGradient>
+      <linearGradient id="treeGradient" x1="0" y1="0" x2="0" y2="100">
+        <stop offset="0%" stopColor="oklch(0.45 0.10 150)" />
+        <stop offset="100%" stopColor="oklch(0.35 0.08 145)" />
+      </linearGradient>
+      <linearGradient id="rootGradient" x1="0" y1="0" x2="0" y2="100">
+        <stop offset="0%" stopColor="oklch(0.72 0.12 65)" />
+        <stop offset="100%" stopColor="oklch(0.65 0.12 60)" />
+      </linearGradient>
+      <radialGradient id="sunGradient">
+        <stop offset="0%" stopColor="oklch(0.72 0.12 65)" />
+        <stop offset="100%" stopColor="oklch(0.68 0.15 45)" />
+      </radialGradient>
+    </defs>
+  </svg>
+)
 
 interface NavigationProps {
   currentPage: string
@@ -20,7 +76,6 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
   const { t, language, setLanguage } = useLanguage()
 
   const navItems = [
-    { id: 'home', label: t.nav.home, icon: Fish },
     { id: 'menu', label: t.nav.menu, icon: ForkKnife },
     { id: 'about', label: t.nav.about, icon: Users },
     { id: 'reservations', label: t.nav.reservations, icon: CalendarBlank },
@@ -35,12 +90,18 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
 
   return (
     <nav className="bg-primary text-primary-foreground sticky top-0 z-50 shadow-lg">
-      <div className="container mx-auto px-4 py-4 max-w-6xl">
+      <div className="container mx-auto px-4 py-3 max-w-6xl">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Fish size={32} weight="fill" className="text-accent" />
-            <h1 className="font-display text-2xl md:text-3xl font-bold">Marisma</h1>
-          </div>
+          <button 
+            onClick={() => handleNavClick('home')}
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity group"
+          >
+            <MarismaLogo size={48} className="group-hover:scale-105 transition-transform" />
+            <div className="flex flex-col">
+              <h1 className="font-display text-xl md:text-2xl font-bold leading-tight">Marisma</h1>
+              <span className="text-xs text-accent font-light italic tracking-wide">Cocina de Mar</span>
+            </div>
+          </button>
 
           <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
