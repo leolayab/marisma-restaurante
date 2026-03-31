@@ -19,7 +19,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <img 
                 src="/logo.jpg" 
                 alt="Marisma Logo" 
-                className="h-36 w-36 object-contain drop-shadow-2xl rounded-full"
+                className="h-24 w-24 object-contain drop-shadow-2xl rounded-full"
               />
             </div>
             <h1 className="font-display text-5xl md:text-7xl font-bold mb-4 drop-shadow-lg">

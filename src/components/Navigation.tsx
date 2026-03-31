@@ -43,7 +43,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             <img 
               src="/logo.jpg" 
               alt="Marisma Logo" 
-              className="h-12 w-12 object-contain group-hover:scale-105 transition-transform rounded-full"
+              className="h-10 w-10 object-contain group-hover:scale-105 transition-transform rounded-full"
             />
             <div className="flex flex-col">
               <h1 className="font-display text-xl md:text-2xl font-bold leading-tight">Marisma</h1>
