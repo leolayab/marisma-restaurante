@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useKV } from '@github/spark/hooks'
+import { useLanguage } from '@/lib/LanguageContext'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -15,7 +16,7 @@ import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { CalendarBlank } from '@phosphor-icons/react'
 import { format } from 'date-fns'
-import { es } from 'date-fns/locale'
+import { es, enUS } from 'date-fns/locale'
 import { toast } from 'sonner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -32,6 +33,7 @@ interface Reservation {
 }
 
 export default function ReservationsPage() {
+  const { t, language } = useLanguage()
   const [reservations, setReservations] = useKV<Reservation[]>('reservations', [])
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -41,11 +43,13 @@ export default function ReservationsPage() {
   const [guests, setGuests] = useState('')
   const [notes, setNotes] = useState('')
 
+  const locale = language === 'es' ? es : enUS
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!name || !phone || !date || !time || !guests) {
-      toast.error('Por favor completa todos los campos requeridos')
+      toast.error(t.reservations.error)
       return
     }
 
@@ -63,9 +67,7 @@ export default function ReservationsPage() {
 
     setReservations((current) => [...(current || []), newReservation])
 
-    toast.success('¡Reserva enviada exitosamente!', {
-      description: 'Nos pondremos en contacto pronto para confirmar tu reserva.',
-    })
+    toast.success(t.reservations.success)
 
     setName('')
     setPhone('')
@@ -81,18 +83,18 @@ export default function ReservationsPage() {
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold text-primary mb-4">
-            Reservaciones
+            {t.reservations.title}
           </h1>
           <p className="text-xl text-foreground/70">
-            Reserva tu mesa y disfruta de la mejor experiencia gastronómica
+            {t.reservations.subtitle}
           </p>
         </div>
 
         <Card className="shadow-2xl border-2 border-turquoise/30">
           <CardHeader className="bg-gradient-to-r from-primary to-turquoise text-white">
-            <CardTitle className="text-3xl">Hacer una Reserva</CardTitle>
+            <CardTitle className="text-3xl">{t.reservations.title}</CardTitle>
             <CardDescription className="text-white/90 text-base">
-              Completa el formulario y nos pondremos en contacto contigo para confirmar
+              {t.reservations.subtitle}
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
@@ -100,13 +102,13 @@ export default function ReservationsPage() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-primary font-semibold">
-                    Nombre Completo *
+                    {t.reservations.name} *
                   </Label>
                   <Input
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Tu nombre"
+                    placeholder={t.reservations.namePlaceholder}
                     required
                     className="border-2 focus:border-accent"
                   />
@@ -114,14 +116,14 @@ export default function ReservationsPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-primary font-semibold">
-                    Teléfono *
+                    {t.reservations.phone} *
                   </Label>
                   <Input
                     id="phone"
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="300 123 4567"
+                    placeholder={t.reservations.phonePlaceholder}
                     required
                     className="border-2 focus:border-accent"
                   />
@@ -130,21 +132,21 @@ export default function ReservationsPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-primary font-semibold">
-                  Correo Electrónico
+                  {t.reservations.email}
                 </Label>
                 <Input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="tucorreo@ejemplo.com"
+                  placeholder={t.reservations.emailPlaceholder}
                   className="border-2 focus:border-accent"
                 />
               </div>
 
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="space-y-2">
-                  <Label className="text-primary font-semibold">Fecha *</Label>
+                  <Label className="text-primary font-semibold">{t.reservations.date} *</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
@@ -152,7 +154,7 @@ export default function ReservationsPage() {
                         className="w-full justify-start text-left font-normal border-2 hover:border-accent"
                       >
                         <CalendarBlank className="mr-2 h-4 w-4" />
-                        {date ? format(date, 'PPP', { locale: es }) : 'Selecciona fecha'}
+                        {date ? format(date, 'PPP', { locale }) : t.reservations.datePlaceholder}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
@@ -162,7 +164,7 @@ export default function ReservationsPage() {
                         onSelect={setDate}
                         disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                         initialFocus
-                        locale={es}
+                        locale={locale}
                       />
                     </PopoverContent>
                   </Popover>
@@ -170,11 +172,11 @@ export default function ReservationsPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="time" className="text-primary font-semibold">
-                    Hora *
+                    {t.reservations.time} *
                   </Label>
                   <Select value={time} onValueChange={setTime} required>
                     <SelectTrigger id="time" className="border-2 focus:border-accent">
-                      <SelectValue placeholder="Selecciona hora" />
+                      <SelectValue placeholder={t.reservations.timePlaceholder} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="11:00">11:00 AM</SelectItem>
@@ -194,21 +196,21 @@ export default function ReservationsPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="guests" className="text-primary font-semibold">
-                    Personas *
+                    {t.reservations.guests} *
                   </Label>
                   <Select value={guests} onValueChange={setGuests} required>
                     <SelectTrigger id="guests" className="border-2 focus:border-accent">
-                      <SelectValue placeholder="# Personas" />
+                      <SelectValue placeholder={t.reservations.guestsPlaceholder} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="1">1 Persona</SelectItem>
-                      <SelectItem value="2">2 Personas</SelectItem>
-                      <SelectItem value="3">3 Personas</SelectItem>
-                      <SelectItem value="4">4 Personas</SelectItem>
-                      <SelectItem value="5">5 Personas</SelectItem>
-                      <SelectItem value="6">6 Personas</SelectItem>
-                      <SelectItem value="7">7 Personas</SelectItem>
-                      <SelectItem value="8">8+ Personas</SelectItem>
+                      <SelectItem value="1">1</SelectItem>
+                      <SelectItem value="2">2</SelectItem>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="4">4</SelectItem>
+                      <SelectItem value="5">5</SelectItem>
+                      <SelectItem value="6">6</SelectItem>
+                      <SelectItem value="7">7</SelectItem>
+                      <SelectItem value="8">8+</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -216,13 +218,13 @@ export default function ReservationsPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="notes" className="text-primary font-semibold">
-                  Notas Especiales
+                  {t.reservations.specialRequests}
                 </Label>
                 <Textarea
                   id="notes"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Alergias, preferencias de mesa, ocasión especial, etc."
+                  placeholder={t.reservations.specialRequestsPlaceholder}
                   rows={4}
                   className="border-2 focus:border-accent"
                 />
@@ -233,7 +235,7 @@ export default function ReservationsPage() {
                 size="lg"
                 className="w-full bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-6 font-semibold"
               >
-                Enviar Reserva
+                {t.reservations.submit}
               </Button>
             </form>
           </CardContent>
@@ -242,24 +244,22 @@ export default function ReservationsPage() {
         <div className="mt-12 grid md:grid-cols-2 gap-6">
           <Card className="border-2 border-primary/20">
             <CardHeader>
-              <CardTitle className="text-primary">Información Importante</CardTitle>
+              <CardTitle className="text-primary">{t.contact.hours}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-foreground/80">
-              <p>• Las reservas se confirman por teléfono</p>
-              <p>• Tiempo de espera de mesa: 15 minutos</p>
-              <p>• Para grupos de 8+ personas, llamar directamente</p>
-              <p>• Política de cancelación: avisar 2 horas antes</p>
+              <p>• {t.contact.monThu}</p>
+              <p>• {t.contact.friSat}</p>
+              <p>• {t.contact.sunday}</p>
             </CardContent>
           </Card>
 
           <Card className="border-2 border-turquoise/20">
             <CardHeader>
-              <CardTitle className="text-primary">Horarios de Atención</CardTitle>
+              <CardTitle className="text-primary">{t.contact.phone}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-foreground/80">
-              <p>• Lunes - Jueves: 11:00 AM - 9:00 PM</p>
-              <p>• Viernes - Sábado: 11:00 AM - 10:00 PM</p>
-              <p>• Domingo: 11:00 AM - 8:00 PM</p>
+              <p>Tel: (+57) 300 123 4567</p>
+              <p>WhatsApp: (+57) 300 123 4567</p>
             </CardContent>
           </Card>
         </div>

@@ -9,17 +9,20 @@ import {
   FacebookLogo,
   WhatsappLogo,
 } from '@phosphor-icons/react'
+import { useLanguage } from '@/lib/LanguageContext'
 
 export default function ContactPage() {
+  const { t } = useLanguage()
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 py-16 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold text-primary mb-4">
-            Contacto
+            {t.contact.title}
           </h1>
           <p className="text-xl text-foreground/70">
-            Estamos aquí para servirte. ¡Visítanos o contáctanos!
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -28,15 +31,14 @@ export default function ContactPage() {
             <CardHeader className="bg-gradient-to-r from-primary to-turquoise text-white">
               <CardTitle className="text-2xl flex items-center gap-3">
                 <MapPin size={32} weight="fill" />
-                Ubicación
+                {t.contact.location}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6">
               <div className="space-y-4 text-lg text-foreground/80">
                 <p className="font-semibold text-primary">Restaurante Marisma</p>
-                <p>Calle 15 # 20-45</p>
-                <p>Centro, Yopal</p>
-                <p>Casanare, Colombia</p>
+                <p>{t.contact.address}</p>
+                <p>{t.contact.city}</p>
               </div>
             </CardContent>
           </Card>
@@ -45,13 +47,12 @@ export default function ContactPage() {
             <CardHeader className="bg-gradient-to-r from-primary to-turquoise text-white">
               <CardTitle className="text-2xl flex items-center gap-3">
                 <Phone size={32} weight="fill" />
-                Teléfono
+                {t.contact.phone}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div>
-                  <p className="font-semibold text-primary text-lg mb-2">Línea Principal</p>
                   <a
                     href="tel:+573001234567"
                     className="text-xl text-turquoise hover:text-primary transition-colors"
@@ -79,21 +80,21 @@ export default function ContactPage() {
             <CardHeader className="bg-gradient-to-r from-primary to-turquoise text-white">
               <CardTitle className="text-2xl flex items-center gap-3">
                 <Clock size={32} weight="fill" />
-                Horarios
+                {t.contact.hours}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6">
               <div className="space-y-3 text-foreground/80">
                 <div className="flex justify-between items-center pb-2 border-b border-border">
-                  <span className="font-semibold text-primary">Lunes - Jueves</span>
+                  <span className="font-semibold text-primary">{t.home.monThu}</span>
                   <span>11:00 AM - 9:00 PM</span>
                 </div>
                 <div className="flex justify-between items-center pb-2 border-b border-border">
-                  <span className="font-semibold text-primary">Viernes - Sábado</span>
+                  <span className="font-semibold text-primary">{t.home.friSat}</span>
                   <span>11:00 AM - 10:00 PM</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold text-primary">Domingo</span>
+                  <span className="font-semibold text-primary">{t.home.sunday}</span>
                   <span>11:00 AM - 8:00 PM</span>
                 </div>
               </div>
@@ -104,13 +105,12 @@ export default function ContactPage() {
             <CardHeader className="bg-gradient-to-r from-primary to-turquoise text-white">
               <CardTitle className="text-2xl flex items-center gap-3">
                 <EnvelopeSimple size={32} weight="fill" />
-                Correo Electrónico
+                {t.contact.email}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div>
-                  <p className="font-semibold text-primary text-lg mb-2">Email General</p>
                   <a
                     href="mailto:info@marisma.com"
                     className="text-xl text-turquoise hover:text-primary transition-colors"
@@ -119,7 +119,6 @@ export default function ContactPage() {
                   </a>
                 </div>
                 <div>
-                  <p className="font-semibold text-primary text-lg mb-2">Reservaciones</p>
                   <a
                     href="mailto:reservas@marisma.com"
                     className="text-xl text-turquoise hover:text-primary transition-colors"
@@ -134,7 +133,7 @@ export default function ContactPage() {
 
         <Card className="border-2 border-accent/30 shadow-2xl">
           <CardHeader className="text-center bg-gradient-to-r from-primary via-turquoise to-primary text-white">
-            <CardTitle className="text-3xl">Síguenos en Redes Sociales</CardTitle>
+            <CardTitle className="text-3xl">{t.contact.followUs}</CardTitle>
           </CardHeader>
           <CardContent className="pt-8">
             <div className="flex flex-wrap justify-center gap-6">
@@ -185,19 +184,6 @@ export default function ContactPage() {
             </div>
           </CardContent>
         </Card>
-
-        <div className="mt-12 text-center bg-card p-8 rounded-lg shadow-lg border-2 border-turquoise/30">
-          <h3 className="text-2xl font-bold text-primary mb-4">
-            ¿Cómo Llegar?
-          </h3>
-          <p className="text-lg text-foreground/80 mb-4">
-            Estamos ubicados en el centro de Yopal, cerca de los principales puntos de referencia
-            de la ciudad. Contamos con parqueadero disponible para nuestros clientes.
-          </p>
-          <p className="text-foreground/70">
-            Para indicaciones específicas, no dudes en llamarnos o escribirnos por WhatsApp.
-          </p>
-        </div>
       </div>
     </div>
   )

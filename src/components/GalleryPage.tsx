@@ -1,42 +1,27 @@
 import { Card } from '@/components/ui/card'
+import { useLanguage } from '@/lib/LanguageContext'
 
 const galleryImages = [
-  {
-    title: 'Pargo Rojo Fresco',
-    description: 'Nuestro icónico pargo rojo preparado al estilo costeño',
-  },
-  {
-    title: 'Cazuela de Mariscos',
-    description: 'Una deliciosa mezcla de frutos del mar',
-  },
-  {
-    title: 'Ambiente Familiar',
-    description: 'Espacio acogedor para toda la familia',
-  },
-  {
-    title: 'Ceviche Mixto',
-    description: 'Fresco y lleno de sabor',
-  },
-  {
-    title: 'Nuestro Restaurante',
-    description: 'Ubicado en el corazón de Yopal',
-  },
-  {
-    title: 'Langostinos al Ajillo',
-    description: 'Preparados con nuestra receta especial',
-  },
+  { titleKey: 'dish', descKey: 'dish' },
+  { titleKey: 'dish', descKey: 'dish' },
+  { titleKey: 'ambiance', descKey: 'ambiance' },
+  { titleKey: 'dish', descKey: 'dish' },
+  { titleKey: 'restaurant', descKey: 'restaurant' },
+  { titleKey: 'dish', descKey: 'dish' },
 ]
 
 export default function GalleryPage() {
+  const { t } = useLanguage()
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 py-16 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold text-primary mb-4">
-            Galería
+            {t.gallery.title}
           </h1>
           <p className="text-xl text-foreground/70">
-            Un vistazo a nuestros platillos y ambiente
+            {t.gallery.subtitle}
           </p>
         </div>
 
@@ -64,21 +49,16 @@ export default function GalleryPage() {
                   </svg>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/90 to-transparent p-6">
-                  <h3 className="text-white font-bold text-xl mb-1">{image.title}</h3>
-                  <p className="text-white/90 text-sm">{image.description}</p>
+                  <h3 className="text-white font-bold text-xl mb-1">
+                    {t.gallery.alt[image.titleKey as keyof typeof t.gallery.alt]}
+                  </h3>
+                  <p className="text-white/90 text-sm">
+                    {t.gallery.alt[image.descKey as keyof typeof t.gallery.alt]}
+                  </p>
                 </div>
               </div>
             </Card>
           ))}
-        </div>
-
-        <div className="mt-16 text-center bg-card p-8 rounded-lg shadow-lg border-2 border-accent/30">
-          <p className="text-lg text-foreground/80 mb-4">
-            <strong className="text-primary">Visítanos</strong> y vive la experiencia Marisma
-          </p>
-          <p className="text-foreground/70">
-            Las imágenes son ilustrativas. Ven y descubre nuestros auténticos sabores costeños.
-          </p>
         </div>
       </div>
     </div>
