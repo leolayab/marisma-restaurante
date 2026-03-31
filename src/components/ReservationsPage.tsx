@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/select'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { CalendarBlank } from '@phosphor-icons/react'
+import { CalendarBlank, Clock, Phone } from '@phosphor-icons/react'
 import { format } from 'date-fns'
 import { es, enUS } from 'date-fns/locale'
 import { toast } from 'sonner'
@@ -66,7 +66,6 @@ export default function ReservationsPage() {
     }
 
     setReservations((current) => [...(current || []), newReservation])
-
     toast.success(t.reservations.success)
 
     setName('')
@@ -79,29 +78,36 @@ export default function ReservationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 py-16 px-4">
+    <div className="min-h-screen bg-background py-16 px-4">
       <div className="container mx-auto max-w-4xl">
+
+        {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold text-primary mb-4">
+          <h1 className="font-display text-5xl md:text-6xl font-bold text-primary mb-4">
             {t.reservations.title}
           </h1>
-          <p className="text-xl text-foreground/70">
+          <p className="text-xl text-muted-foreground">
             {t.reservations.subtitle}
           </p>
         </div>
 
-        <Card className="shadow-2xl border-2 border-turquoise/30">
-          <CardHeader className="bg-gradient-to-r from-primary to-turquoise text-white">
-            <CardTitle className="text-3xl">{t.reservations.title}</CardTitle>
-            <CardDescription className="text-white/90 text-base">
+        {/* Reservation Form Card */}
+        <Card className="shadow-2xl border border-border hover:border-teal-light transition-all">
+          <CardHeader className="ocean-gradient text-white rounded-t-lg">
+            <CardTitle className="font-display text-3xl">
+              {t.reservations.title}
+            </CardTitle>
+            <CardDescription className="text-primary-foreground/90 text-base">
               {t.reservations.subtitle}
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <form onSubmit={handleSubmit} className="space-y-6">
+
               <div className="grid md:grid-cols-2 gap-6">
+                {/* Name */}
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-primary font-semibold">
+                  <Label htmlFor="name" className="font-display text-primary font-semibold">
                     {t.reservations.name} *
                   </Label>
                   <Input
@@ -110,12 +116,13 @@ export default function ReservationsPage() {
                     onChange={(e) => setName(e.target.value)}
                     placeholder={t.reservations.namePlaceholder}
                     required
-                    className="border-2 focus:border-accent"
+                    className="border-2 border-input bg-muted focus:border-accent focus-visible:ring-accent"
                   />
                 </div>
 
+                {/* Phone */}
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-primary font-semibold">
+                  <Label htmlFor="phone" className="font-display text-primary font-semibold">
                     {t.reservations.phone} *
                   </Label>
                   <Input
@@ -125,13 +132,14 @@ export default function ReservationsPage() {
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder={t.reservations.phonePlaceholder}
                     required
-                    className="border-2 focus:border-accent"
+                    className="border-2 border-input bg-muted focus:border-accent focus-visible:ring-accent"
                   />
                 </div>
               </div>
 
+              {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-primary font-semibold">
+                <Label htmlFor="email" className="font-display text-primary font-semibold">
                   {t.reservations.email}
                 </Label>
                 <Input
@@ -140,24 +148,30 @@ export default function ReservationsPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t.reservations.emailPlaceholder}
-                  className="border-2 focus:border-accent"
+                  className="border-2 border-input bg-muted focus:border-accent focus-visible:ring-accent"
                 />
               </div>
 
               <div className="grid md:grid-cols-3 gap-6">
+                {/* Date Picker */}
                 <div className="space-y-2">
-                  <Label className="text-primary font-semibold">{t.reservations.date} *</Label>
+                  <Label className="font-display text-primary font-semibold">
+                    {t.reservations.date} *
+                  </Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full justify-start text-left font-normal border-2 hover:border-accent"
+                        className="w-full justify-start text-left font-body font-normal border-2 border-input bg-muted hover:border-accent hover:bg-muted"
                       >
-                        <CalendarBlank className="mr-2 h-4 w-4" />
-                        {date ? format(date, 'PPP', { locale }) : t.reservations.datePlaceholder}
+                        <CalendarBlank className="mr-2 h-4 w-4 text-teal-light" />
+                        {date
+                          ? format(date, 'PPP', { locale })
+                          : <span className="text-muted-foreground">{t.reservations.datePlaceholder}</span>
+                        }
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
+                    <PopoverContent className="w-auto p-0 border border-border bg-card">
                       <Calendar
                         mode="single"
                         selected={date}
@@ -165,59 +179,66 @@ export default function ReservationsPage() {
                         disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                         initialFocus
                         locale={locale}
+                        className="text-foreground"
                       />
                     </PopoverContent>
                   </Popover>
                 </div>
 
+                {/* Time */}
                 <div className="space-y-2">
-                  <Label htmlFor="time" className="text-primary font-semibold">
+                  <Label htmlFor="time" className="font-display text-primary font-semibold">
                     {t.reservations.time} *
                   </Label>
                   <Select value={time} onValueChange={setTime} required>
-                    <SelectTrigger id="time" className="border-2 focus:border-accent">
+                    <SelectTrigger
+                      id="time"
+                      className="border-2 border-input bg-muted focus:border-accent focus:ring-accent"
+                    >
                       <SelectValue placeholder={t.reservations.timePlaceholder} />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="11:00">11:00 AM</SelectItem>
-                      <SelectItem value="12:00">12:00 PM</SelectItem>
-                      <SelectItem value="13:00">1:00 PM</SelectItem>
-                      <SelectItem value="14:00">2:00 PM</SelectItem>
-                      <SelectItem value="15:00">3:00 PM</SelectItem>
-                      <SelectItem value="16:00">4:00 PM</SelectItem>
-                      <SelectItem value="17:00">5:00 PM</SelectItem>
-                      <SelectItem value="18:00">6:00 PM</SelectItem>
-                      <SelectItem value="19:00">7:00 PM</SelectItem>
-                      <SelectItem value="20:00">8:00 PM</SelectItem>
-                      <SelectItem value="21:00">9:00 PM</SelectItem>
+                    <SelectContent className="bg-card border border-border">
+                      {['11:00','12:00','13:00','14:00','15:00',
+                        '16:00','17:00','18:00','19:00','20:00','21:00'].map((h) => (
+                        <SelectItem key={h} value={h} className="font-body focus:bg-secondary focus:text-primary">
+                          {parseInt(h) <= 12
+                            ? `${parseInt(h)}:00 ${parseInt(h) === 12 ? 'PM' : 'AM'}`
+                            : `${parseInt(h) - 12}:00 PM`}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
 
+                {/* Guests */}
                 <div className="space-y-2">
-                  <Label htmlFor="guests" className="text-primary font-semibold">
+                  <Label htmlFor="guests" className="font-display text-primary font-semibold">
                     {t.reservations.guests} *
                   </Label>
                   <Select value={guests} onValueChange={setGuests} required>
-                    <SelectTrigger id="guests" className="border-2 focus:border-accent">
+                    <SelectTrigger
+                      id="guests"
+                      className="border-2 border-input bg-muted focus:border-accent focus:ring-accent"
+                    >
                       <SelectValue placeholder={t.reservations.guestsPlaceholder} />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="1">1</SelectItem>
-                      <SelectItem value="2">2</SelectItem>
-                      <SelectItem value="3">3</SelectItem>
-                      <SelectItem value="4">4</SelectItem>
-                      <SelectItem value="5">5</SelectItem>
-                      <SelectItem value="6">6</SelectItem>
-                      <SelectItem value="7">7</SelectItem>
-                      <SelectItem value="8">8+</SelectItem>
+                    <SelectContent className="bg-card border border-border">
+                      {['1','2','3','4','5','6','7'].map((n) => (
+                        <SelectItem key={n} value={n} className="font-body focus:bg-secondary focus:text-primary">
+                          {n}
+                        </SelectItem>
+                      ))}
+                      <SelectItem value="8" className="font-body focus:bg-secondary focus:text-primary">
+                        8+
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
+              {/* Notes */}
               <div className="space-y-2">
-                <Label htmlFor="notes" className="text-primary font-semibold">
+                <Label htmlFor="notes" className="font-display text-primary font-semibold">
                   {t.reservations.specialRequests}
                 </Label>
                 <Textarea
@@ -226,42 +247,82 @@ export default function ReservationsPage() {
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder={t.reservations.specialRequestsPlaceholder}
                   rows={4}
-                  className="border-2 focus:border-accent"
+                  className="border-2 border-input bg-muted focus:border-accent focus-visible:ring-accent font-body"
                 />
               </div>
 
+              {/* Submit CTA - Warm Gold per guide */}
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-6 font-semibold"
+                className="w-full bg-accent text-accent-foreground hover:bg-accent/90 text-lg py-6 font-display font-semibold shadow-lg"
               >
                 {t.reservations.submit}
               </Button>
+
             </form>
           </CardContent>
         </Card>
 
+        {/* Info Cards */}
         <div className="mt-12 grid md:grid-cols-2 gap-6">
-          <Card className="border-2 border-primary/20">
-            <CardHeader>
-              <CardTitle className="text-primary">{t.contact.hours}</CardTitle>
+
+          {/* Hours Card */}
+          <Card className="bg-card border border-border hover:border-teal-light hover:shadow-2xl transition-all">
+            <CardHeader className="ocean-gradient text-white rounded-t-lg">
+              <CardTitle className="font-display text-xl flex items-center gap-3">
+                <Clock size={24} weight="fill" className="text-accent" />
+                {t.contact.hours}
+              </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 text-foreground/80">
-              <p>• {t.contact.monThu}</p>
-              <p>• {t.contact.friSat}</p>
-              <p>• {t.contact.sunday}</p>
+            <CardContent className="pt-4 space-y-3">
+              <div className="flex justify-between items-center border-b border-border pb-2">
+                <span className="font-semibold text-primary">{t.home.monThu}</span>
+                <span className="text-muted-foreground text-sm">11:00 AM – 9:00 PM</span>
+              </div>
+              <div className="flex justify-between items-center border-b border-border pb-2">
+                <span className="font-semibold text-primary">{t.home.friSat}</span>
+                <span className="text-muted-foreground text-sm">11:00 AM – 10:00 PM</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-primary">{t.home.sunday}</span>
+                <span className="text-muted-foreground text-sm">11:00 AM – 8:00 PM</span>
+              </div>
             </CardContent>
           </Card>
 
-          <Card className="border-2 border-turquoise/20">
-            <CardHeader>
-              <CardTitle className="text-primary">{t.contact.phone}</CardTitle>
+          {/* Phone Card */}
+          <Card className="bg-card border border-border hover:border-teal-light hover:shadow-2xl transition-all">
+            <CardHeader className="ocean-gradient text-white rounded-t-lg">
+              <CardTitle className="font-display text-xl flex items-center gap-3">
+                <Phone size={24} weight="fill" className="text-accent" />
+                {t.contact.phone}
+              </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 text-foreground/80">
-              <p>Tel: (+57) 300 123 4567</p>
-              <p>WhatsApp: (+57) 300 123 4567</p>
+            <CardContent className="pt-4 space-y-3">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Teléfono</p>
+                <a
+                  href="tel:+573001234567"
+                  className="text-lg text-teal-light hover:text-primary transition-colors font-semibold"
+                >
+                  (+57) 300 123 4567
+                </a>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">WhatsApp</p>
+                <a
+                  href="https://wa.me/573001234567"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg text-teal-light hover:text-primary transition-colors font-semibold"
+                >
+                  (+57) 300 123 4567
+                </a>
+              </div>
             </CardContent>
           </Card>
+
         </div>
       </div>
     </div>

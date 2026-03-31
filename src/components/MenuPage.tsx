@@ -47,50 +47,62 @@ export default function MenuPage() {
   const { t } = useLanguage()
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 py-16 px-4">
+    <div className="min-h-screen bg-background py-16 px-4">
       <div className="container mx-auto max-w-6xl">
+
+        {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold text-primary mb-4">
+          <h1 className="font-display text-5xl md:text-6xl font-bold text-primary mb-4">
             {t.menu.title}
           </h1>
-          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {t.menu.subtitle}
           </p>
         </div>
 
         <div className="space-y-12">
           {menuStructure.map((category, idx) => (
-            <div key={idx} className="animate-fadeIn">
-              <h2 className="text-4xl font-bold text-primary mb-6 text-center md:text-left border-b-4 border-accent inline-block pb-2">
-                {t.menu[category.titleKey as keyof typeof t.menu] as string}
-              </h2>
-              <div className="grid md:grid-cols-2 gap-6 mt-8">
+            <div key={idx}>
+
+              {/* Category Header - gold underline accent per guide */}
+              <div className="mb-8 text-center md:text-left">
+                <h2 className="font-display text-4xl font-bold text-primary inline-block pb-2 border-b-4 border-accent">
+                  {t.menu[category.titleKey as keyof typeof t.menu] as string}
+                </h2>
+              </div>
+
+              {/* Menu Items Grid */}
+              <div className="grid md:grid-cols-2 gap-6">
                 {category.items.map((item, itemIdx) => (
                   <Card
                     key={itemIdx}
-                    className="hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-turquoise/20 bg-card"
+                    className="bg-card border border-border hover:border-teal-light hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   >
                     <CardHeader>
                       <div className="flex justify-between items-start gap-4">
-                        <CardTitle className="text-2xl text-primary flex-1">
+                        <CardTitle className="font-display text-2xl text-primary flex-1">
                           {t.menu[item.nameKey as keyof typeof t.menu] as string}
                         </CardTitle>
-                        <span className="text-2xl font-bold text-accent whitespace-nowrap">
+                        {/* Price highlight - accent gold per guide */}
+                        <span className="font-display text-2xl font-bold text-accent whitespace-nowrap">
                           {item.price}
                         </span>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <CardDescription className="text-base text-foreground/70 leading-relaxed">
+                      <CardDescription className="text-base text-muted-foreground leading-relaxed">
                         {t.menu[item.descKey as keyof typeof t.menu] as string}
                       </CardDescription>
                     </CardContent>
                   </Card>
                 ))}
               </div>
+
+              {/* Section Divider - teal-light per guide */}
               {idx < menuStructure.length - 1 && (
-                <Separator className="my-12 bg-turquoise/30" />
+                <Separator className="my-12 bg-teal-light/30" />
               )}
+
             </div>
           ))}
         </div>

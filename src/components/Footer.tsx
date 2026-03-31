@@ -1,5 +1,6 @@
 import { Fish } from '@phosphor-icons/react'
 import { useLanguage } from '@/lib/LanguageContext'
+import logo from '@/assets/logo.jpeg'
 
 export default function Footer() {
   const { t } = useLanguage()
@@ -9,9 +10,16 @@ export default function Footer() {
       <div className="container mx-auto max-w-6xl">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Fish size={32} weight="fill" className="text-accent" />
-              <h3 className="font-display text-2xl font-bold">Marisma</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src={logo}
+                alt="Marisma - Cocina de Mar"
+                className="h-14 w-14 object-contain rounded-full border-2 border-accent"
+              />
+              <div>
+                <h3 className="font-display text-2xl font-bold">Marisma</h3>
+                <p className="text-accent text-sm font-body italic">Cocina de Mar</p>
+              </div>
             </div>
             <p className="text-primary-foreground/80 leading-relaxed">
               {t.footer.description}

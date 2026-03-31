@@ -65,6 +65,9 @@ const defaultTheme = {
         11: "var(--color-accent-11)",
         12: "var(--color-accent-12)",
         contrast: "var(--color-accent-contrast)",
+        // Marisma accent - Warm Gold
+        DEFAULT: "oklch(0.72 0.12 65)",
+        foreground: "oklch(0.15 0.02 65)",
       },
       "accent-secondary": {
         1: "var(--color-accent-secondary-1)",
@@ -91,6 +94,36 @@ const defaultTheme = {
         overlay: "var(--color-bg-overlay)",
       },
       "focus-ring": "var(--color-focus-ring)",
+
+      // Marisma Brand Colors
+      primary: {
+        DEFAULT: "oklch(0.38 0.08 200)",
+        foreground: "oklch(0.98 0.01 200)",
+      },
+      "teal-light": {
+        DEFAULT: "oklch(0.65 0.10 195)",
+        foreground: "oklch(0.15 0.05 195)",
+      },
+      sunset: {
+        DEFAULT: "oklch(0.68 0.15 45)",
+        foreground: "oklch(0.15 0.05 45)",
+      },
+      background: "oklch(0.98 0.01 200)",
+      secondary: {
+        DEFAULT: "oklch(0.88 0.04 200)",
+        foreground: "oklch(0.38 0.08 200)",
+      },
+      muted: {
+        DEFAULT: "oklch(0.93 0.02 200)",
+        foreground: "oklch(0.50 0.05 200)",
+      },
+      card: {
+        DEFAULT: "oklch(0.98 0.01 200)",
+        foreground: "oklch(0.20 0.03 200)",
+      },
+      border: "oklch(0.88 0.04 200)",
+      input: "oklch(0.88 0.04 200)",
+      foreground: "oklch(0.20 0.03 200)",
     },
     borderRadius: {
       sm: "var(--radius-sm)",
@@ -99,6 +132,21 @@ const defaultTheme = {
       xl: "var(--radius-xl)",
       "2xl": "var(--radius-2xl)",
       full: "var(--radius-full)",
+    },
+    fontFamily: {
+      display: ["Montserrat", "sans-serif"],
+      body: ["Open Sans", "sans-serif"],
+    },
+    keyframes: {
+      wave: {
+        "0%, 100%": { transform: "translate(0px, 0px)" },
+        "25%": { transform: "translate(4px, -4px)" },
+        "50%": { transform: "translate(0px, -8px)" },
+        "75%": { transform: "translate(-4px, -4px)" },
+      },
+    },
+    animation: {
+      wave: "wave 8s ease-in-out infinite",
     },
   },
   spacing: {
