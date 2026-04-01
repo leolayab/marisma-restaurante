@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import logo from '@/assets/logo.jpeg'
 
 interface NavigationProps {
   currentPage: string
@@ -46,42 +47,68 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             </div>
           </button>
 
-          <div className="hidden md:flex items-center gap-6">
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
-              <Button
+              <button
                 key={item.id}
-                variant="ghost"
                 onClick={() => handleNavClick(item.id)}
-                className={`text-primary-foreground hover:text-accent hover:bg-primary/80 transition-all duration-300 tracking-wider uppercase text-sm font-medium ${
-                  currentPage === item.id
-                    ? 'border-b-2 border-accent rounded-none'
-                    : 'border-b-2 border-transparent'
-                }`}
+                className={`
+                  font-display px-4 py-5 text-sm font-semibold tracking-widest uppercase
+                  transition-all duration-200 border-b-2
+                  ${currentPage === item.id
+                    ? 'border-accent text-accent'
+                    : 'border-transparent hover:border-accent/50 hover:text-accent'
+                  }
+                `}
+                style={{
+                  color: currentPage === item.id ? '#c9a96e' : '#f5e6c8',
+                }}
               >
                 {item.label}
-              </Button>
+              </button>
             ))}
-            
+
+            {/* Language Switcher */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-primary-foreground hover:text-accent hover:bg-primary/80"
+                <button
+                  className="px-4 py-5 transition-colors hover:text-accent"
+                  style={{ color: '#f5e6c8' }}
                 >
-                  <Translate size={24} weight="bold" />
-                </Button>
+                  <Translate size={22} weight="bold" />
+                </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-card">
+              <DropdownMenuContent
+                align="end"
+                className="border border-border"
+                style={{ backgroundColor: '#0d3d4a' }}
+              >
                 <DropdownMenuItem
                   onClick={() => setLanguage('es')}
-                  className={language === 'es' ? 'bg-accent/20 font-semibold' : ''}
+                  className={`font-body cursor-pointer ${
+                    language === 'es'
+                      ? 'font-semibold'
+                      : ''
+                  }`}
+                  style={{
+                    color: language === 'es' ? '#c9a96e' : '#f5e6c8',
+                    backgroundColor: language === 'es' ? 'rgba(201,169,110,0.15)' : 'transparent',
+                  }}
                 >
                   🇪🇸 Español
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => setLanguage('en')}
-                  className={language === 'en' ? 'bg-accent/20 font-semibold' : ''}
+                  className={`font-body cursor-pointer ${
+                    language === 'en'
+                      ? 'font-semibold'
+                      : ''
+                  }`}
+                  style={{
+                    color: language === 'en' ? '#c9a96e' : '#f5e6c8',
+                    backgroundColor: language === 'en' ? 'rgba(201,169,110,0.15)' : 'transparent',
+                  }}
                 >
                   🇺🇸 English
                 </DropdownMenuItem>
@@ -89,55 +116,85 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             </DropdownMenu>
           </div>
 
+          {/* Mobile Hamburger */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="text-primary-foreground">
+              <button
+                className="p-2 rounded transition-colors hover:text-accent"
+                style={{ color: '#f5e6c8' }}
+              >
                 <List size={28} weight="bold" />
-              </Button>
+              </button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-primary text-primary-foreground border-accent">
-              <div className="flex flex-col gap-4 mt-8">
+            <SheetContent
+              side="right"
+              className="border-l border-accent/30"
+              style={{ backgroundColor: '#0d3d4a', color: '#f5e6c8' }}
+            >
+              <div className="flex flex-col gap-2 mt-8">
                 {navItems.map((item) => {
                   const Icon = item.icon
                   return (
-                    <Button
+                    <button
                       key={item.id}
-                      variant="ghost"
                       onClick={() => handleNavClick(item.id)}
-                      className={`justify-start gap-3 text-lg text-primary-foreground hover:text-accent hover:bg-primary/80 ${
-                        currentPage === item.id ? 'bg-primary/80 text-accent' : ''
-                      }`}
+                      className={`
+                        font-display flex items-center gap-3 px-4 py-3 text-lg
+                        tracking-wide rounded transition-all text-left
+                        border-l-4
+                        ${currentPage === item.id
+                          ? 'border-accent bg-white/10'
+                          : 'border-transparent hover:border-accent/50 hover:bg-white/5'
+                        }
+                      `}
+                      style={{
+                        color: currentPage === item.id ? '#c9a96e' : '#f5e6c8',
+                      }}
                     >
-                      <Icon size={24} />
+                      <Icon size={22} />
                       {item.label}
-                    </Button>
+                    </button>
                   )
                 })}
-                
-                <div className="border-t border-primary-foreground/20 pt-4 mt-4">
-                  <div className="text-sm text-primary-foreground/60 mb-2 px-4">Language / Idioma</div>
-                  <Button
-                    variant="ghost"
-                    onClick={() => setLanguage('es')}
-                    className={`justify-start gap-3 text-lg text-primary-foreground hover:text-accent hover:bg-primary/80 w-full ${
-                      language === 'es' ? 'bg-primary/80 text-accent' : ''
-                    }`}
+
+                {/* Language Switcher - Mobile */}
+                <div
+                  className="border-t pt-4 mt-4"
+                  style={{ borderColor: 'rgba(245,230,200,0.20)' }}
+                >
+                  <p
+                    className="font-body text-xs uppercase tracking-widest px-4 mb-3"
+                    style={{ color: 'rgba(245,230,200,0.50)' }}
                   >
-                    🇪🇸 Español
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    onClick={() => setLanguage('en')}
-                    className={`justify-start gap-3 text-lg text-primary-foreground hover:text-accent hover:bg-primary/80 w-full ${
-                      language === 'en' ? 'bg-primary/80 text-accent' : ''
-                    }`}
-                  >
-                    🇺🇸 English
-                  </Button>
+                    Language / Idioma
+                  </p>
+                  {([
+                    { code: 'es', flag: '🇪🇸', label: 'Español' },
+                    { code: 'en', flag: '🇺🇸', label: 'English' },
+                  ]).map(({ code, flag, label }) => (
+                    <button
+                      key={code}
+                      onClick={() => setLanguage(code as 'es' | 'en')}
+                      className={`
+                        font-body flex items-center gap-3 w-full px-4 py-3 text-lg
+                        rounded transition-all border-l-4
+                        ${language === code
+                          ? 'border-accent bg-white/10'
+                          : 'border-transparent hover:border-accent/50 hover:bg-white/5'
+                        }
+                      `}
+                      style={{
+                        color: language === code ? '#c9a96e' : '#f5e6c8',
+                      }}
+                    >
+                      {flag} {label}
+                    </button>
+                  ))}
                 </div>
               </div>
             </SheetContent>
           </Sheet>
+
         </div>
       </div>
     </nav>
