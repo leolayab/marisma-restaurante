@@ -136,20 +136,9 @@ export default function ContactPage() {
             </CardHeader>
             <CardContent className="pt-6">
               <div className="space-y-3">
-                {[
-                  { label: t.home.monThu, hours: '11:00 AM - 9:00 PM',  border: true },
-                  { label: t.home.friSat, hours: '11:00 AM - 10:00 PM', border: true },
-                  { label: t.home.sunday, hours: '11:00 AM - 8:00 PM',  border: false },
-                ].map(({ label, hours, border }) => (
-                  <div
-                    key={label}
-                    className="flex justify-between items-center pb-2"
-                    style={border ? { borderBottom: `1px solid ${C.border}` } : {}}
-                  >
-                    <span className="font-semibold" style={{ color: C.primary }}>{label}</span>
-                    <span className="text-sm"       style={{ color: C.mutedFg }}>{hours}</span>
-                  </div>
-                ))}
+                <div className="flex justify-between items-center pb-2">
+                    <span className="font-semibold" style={{ color: C.primary }}>{t.contact.joinUs}</span>
+                </div>
               </div>
             </CardContent>
           </Card>
