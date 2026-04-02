@@ -19,6 +19,7 @@ import { format } from 'date-fns'
 import { es, enUS } from 'date-fns/locale'
 import { toast } from 'sonner'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { C } from '@/lib/brand'
 
 interface Reservation {
   id: string
@@ -31,22 +32,6 @@ interface Reservation {
   notes: string
   createdAt: string
 }
-
-// ── Brand tokens (logo-aligned, bypass Spark overrides) ──────────────
-const C = {
-  primary:        '#0d3d4a',
-  accent:         '#c9a96e',
-  tealLight:      '#3a8a8a',
-  background:     '#f5f0e8',
-  card:           '#faf7f2',
-  cardFg:         '#1a2e2e',
-  border:         '#c5d8d8',
-  mutedBg:        '#e8f0f0',
-  mutedFg:        '#4a6a6a',
-  cream:          '#f5e6c8',
-  headerGrad:     'linear-gradient(135deg, #0d3d4a 0%, #1a5568 50%, #3a8a8a 100%)',
-  separator:      'rgba(58,138,138,0.25)',
-} as const
 
 export default function ReservationsPage() {
   const { t, language } = useLanguage()

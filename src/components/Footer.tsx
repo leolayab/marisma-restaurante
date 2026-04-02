@@ -1,18 +1,10 @@
 import { useLanguage } from '@/lib/LanguageContext'
 import { MapPin, Phone, EnvelopeSimple, Clock } from '@phosphor-icons/react'
 import logo from '@/assets/logo.jpeg'
+import { C } from '@/lib/brand'
 
-// ── Brand tokens (logo-aligned, bypass Spark overrides) ──────────────
-const C = {
-  primary:    '#0d3d4a',
-  accent:     '#c9a96e',
-  tealLight:  '#3a8a8a',
-  border:     'rgba(245,230,200,0.15)',
-  cream:      '#f5e6c8',
-  creamMuted: 'rgba(245,230,200,0.70)',
-  creamFaint: 'rgba(245,230,200,0.40)',
-  footerGrad: 'linear-gradient(135deg, #0a2d38 0%, #0d3d4a 60%, #1a5568 100%)',
-} as const
+// Remove the local const C = {...} block entirely
+// ...existing code...
 
 export default function Footer() {
   const { t } = useLanguage()
