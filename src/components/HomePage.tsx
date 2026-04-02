@@ -2,31 +2,11 @@ import { Waves, Fish, CheckCircle, Users } from '@phosphor-icons/react'
 import { Card } from '@/components/ui/card'
 import { useLanguage } from '@/lib/LanguageContext'
 import logo from '@/assets/logo.jpeg'
+import { C } from '@/lib/brand'
 
 interface HomePageProps {
   onNavigate: (page: string) => void
 }
-
-// ── Brand tokens (logo-aligned, bypass Spark overrides) ──────────────
-const C = {
-  primary:     '#0d3d4a',
-  accent:      '#c9a96e',
-  tealLight:   '#3a8a8a',
-  background:  '#f5f0e8',
-  card:        '#faf7f2',
-  border:      '#c5d8d8',
-  mutedFg:     '#4a6a6a',
-  cream:       '#f5e6c8',
-  secondaryBg: 'rgba(214,234,234,0.30)',
-  headerGrad:  'linear-gradient(135deg, #0d3d4a 0%, #1a5568 50%, #3a8a8a 100%)',
-  wavePattern: `repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    rgba(58,138,138,0.06) 10px,
-    rgba(58,138,138,0.06) 20px
-  )`,
-} as const
 
 const featureCards = [
   { icon: Fish,        titleKey: 'freshProducts',      descKey: 'freshProductsDesc'      },
@@ -49,9 +29,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="text-center text-white">
             <div className="flex justify-center mb-6 animate-wave">
               <img 
-                src="/logo.jpg" 
-                alt="Marisma Logo" 
-                className="h-24 w-24 object-contain drop-shadow-2xl rounded-full"
+                src={logo}
+                alt="Marisma - Cocina de Mar"
+                className="h-32 w-32 md:h-48 md:w-48 lg:h-56 lg:w-56 object-contain drop-shadow-2xl rounded-full"
+                style={{ border: `2px solid ${C.accent}` }}
               />
             </div>
 

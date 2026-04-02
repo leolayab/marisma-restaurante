@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card'
 import { useLanguage } from '@/lib/LanguageContext'
+import { C } from '@/lib/brand'
 
 const galleryImages = [
   { titleKey: 'dish',       descKey: 'dish'       },
@@ -9,26 +10,6 @@ const galleryImages = [
   { titleKey: 'restaurant', descKey: 'restaurant' },
   { titleKey: 'dish',       descKey: 'dish'       },
 ]
-
-// ── Brand tokens (logo-aligned, bypass Spark overrides) ──────────────
-const C = {
-  primary:     '#0d3d4a',
-  accent:      '#c9a96e',
-  tealLight:   '#3a8a8a',
-  background:  '#f5f0e8',
-  card:        '#faf7f2',
-  border:      '#c5d8d8',
-  mutedFg:     '#4a6a6a',
-  cream:       '#f5e6c8',
-  headerGrad:  'linear-gradient(135deg, #0d3d4a 0%, #1a5568 50%, #3a8a8a 100%)',
-  wavePattern: `repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    rgba(58,138,138,0.06) 10px,
-    rgba(58,138,138,0.06) 20px
-  )`,
-} as const
 
 export default function GalleryPage() {
   const { t } = useLanguage()

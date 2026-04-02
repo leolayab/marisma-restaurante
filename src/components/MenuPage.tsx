@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { useLanguage } from '@/lib/LanguageContext'
+import { C } from '@/lib/brand'
 
 interface MenuItem {
   nameKey: string
@@ -42,18 +43,6 @@ const menuStructure: MenuCategory[] = [
     ],
   },
 ]
-
-// ── Brand tokens (logo-aligned, bypass Spark overrides) ──────────────
-const C = {
-  primary:        '#0d3d4a',
-  accent:         '#c9a96e',
-  tealLight:      '#3a8a8a',
-  background:     '#f5f0e8',
-  card:           '#faf7f2',
-  border:         '#c5d8d8',
-  mutedFg:        '#4a6a6a',
-  separator:      'rgba(58,138,138,0.25)',
-} as const
 
 export default function MenuPage() {
   const { t } = useLanguage()

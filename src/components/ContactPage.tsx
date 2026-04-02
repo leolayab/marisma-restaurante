@@ -9,20 +9,7 @@ import {
   WhatsappLogo,
 } from '@phosphor-icons/react'
 import { useLanguage } from '@/lib/LanguageContext'
-
-// ── Brand tokens (logo-aligned, bypass Spark overrides) ──────────────
-const C = {
-  primary:    '#0d3d4a',
-  accent:     '#c9a96e',
-  tealLight:  '#3a8a8a',
-  background: '#f5f0e8',
-  card:       '#faf7f2',
-  cardFg:     '#1a2e2e',
-  border:     '#c5d8d8',
-  mutedFg:    '#4a6a6a',
-  cream:      '#f5e6c8',
-  headerGrad: 'linear-gradient(135deg, #0d3d4a 0%, #1a5568 50%, #3a8a8a 100%)',
-} as const
+import { C } from '@/lib/brand'
 
 export default function ContactPage() {
   const { t } = useLanguage()

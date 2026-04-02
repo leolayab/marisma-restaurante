@@ -10,11 +10,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import logo from '@/assets/logo.jpeg'
+import { C } from '@/lib/brand'
 
 interface NavigationProps {
   currentPage: string
   onNavigate: (page: string) => void
 }
+
+// Remove the local const C = {...} block entirely
+// ...existing code...
 
 export default function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [open, setOpen] = useState(false)
@@ -42,7 +46,12 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             className="flex items-center gap-3 hover:opacity-80 transition-opacity group"
           >
             <div className="flex flex-col">
-              <h1 className="font-display text-xl md:text-2xl font-bold leading-tight">Marisma</h1>
+              <img
+                src={logo}
+                alt="Marisma - Cocina de Mar"
+                className="h-16 w-16 object-contain rounded-full"
+                style={{ border: `2px solid ${C.accent}` }}
+              />
               <span className="text-xs text-accent font-light italic tracking-wide">Cocina de Mar</span>
             </div>
           </button>
@@ -62,7 +71,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                   }
                 `}
                 style={{
-                  color: currentPage === item.id ? '#c9a96e' : '#f5e6c8',
+                  color: currentPage === item.id ? C.accent : C.cream,
                 }}
               >
                 {item.label}
@@ -74,7 +83,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
               <DropdownMenuTrigger asChild>
                 <button
                   className="px-4 py-5 transition-colors hover:text-accent"
-                  style={{ color: '#f5e6c8' }}
+                  style={{ color: C.cream }}
                 >
                   <Translate size={22} weight="bold" />
                 </button>
@@ -82,7 +91,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
               <DropdownMenuContent
                 align="end"
                 className="border border-border"
-                style={{ backgroundColor: '#0d3d4a' }}
+                style={{ backgroundColor: C.primary }}
               >
                 <DropdownMenuItem
                   onClick={() => setLanguage('es')}
@@ -92,7 +101,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                       : ''
                   }`}
                   style={{
-                    color: language === 'es' ? '#c9a96e' : '#f5e6c8',
+                    color: language === 'es' ? C.accent : C.cream,
                     backgroundColor: language === 'es' ? 'rgba(201,169,110,0.15)' : 'transparent',
                   }}
                 >
@@ -106,7 +115,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                       : ''
                   }`}
                   style={{
-                    color: language === 'en' ? '#c9a96e' : '#f5e6c8',
+                    color: language === 'en' ? C.accent : C.cream,
                     backgroundColor: language === 'en' ? 'rgba(201,169,110,0.15)' : 'transparent',
                   }}
                 >
@@ -121,7 +130,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             <SheetTrigger asChild className="md:hidden">
               <button
                 className="p-2 rounded transition-colors hover:text-accent"
-                style={{ color: '#f5e6c8' }}
+                style={{ color: C.cream }}
               >
                 <List size={28} weight="bold" />
               </button>
@@ -129,7 +138,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             <SheetContent
               side="right"
               className="border-l border-accent/30"
-              style={{ backgroundColor: '#0d3d4a', color: '#f5e6c8' }}
+              style={{ backgroundColor: C.primary, color: C.cream }}
             >
               <div className="flex flex-col gap-2 mt-8">
                 {navItems.map((item) => {
@@ -148,7 +157,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                         }
                       `}
                       style={{
-                        color: currentPage === item.id ? '#c9a96e' : '#f5e6c8',
+                        color: currentPage === item.id ? C.accent : C.cream,
                       }}
                     >
                       <Icon size={22} />
@@ -184,7 +193,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                         }
                       `}
                       style={{
-                        color: language === code ? '#c9a96e' : '#f5e6c8',
+                        color: language === code ? C.accent : C.cream,
                       }}
                     >
                       {flag} {label}
