@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Fish, ForkKnife, Users, CalendarBlank, Images, Phone, List, Translate } from '@phosphor-icons/react'
+import { ForkKnife, Users, CalendarBlank, Images, Phone, List, Translate } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { useLanguage } from '@/lib/LanguageContext'
@@ -21,7 +21,6 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
   const { t, language, setLanguage } = useLanguage()
 
   const navItems = [
-    { id: 'home', label: t.nav.home, icon: Fish },
     { id: 'menu', label: t.nav.menu, icon: ForkKnife },
     { id: 'about', label: t.nav.about, icon: Users },
     { id: 'reservations', label: t.nav.reservations, icon: CalendarBlank },
@@ -35,25 +34,18 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
   }
 
   return (
-    <nav style={{ backgroundColor: '#0d3d4a' }} className="text-primary-foreground sticky top-0 z-50 shadow-lg">
+    <nav className="bg-primary text-primary-foreground sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4 py-3 max-w-6xl">
         <div className="flex items-center justify-between">
-
-          {/* Logo */}
-          <div
-            className="flex items-center gap-2 cursor-pointer"
+          <button 
             onClick={() => handleNavClick('home')}
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity group"
           >
-            <img
-              src={logo}
-              alt="Marisma - Cocina de Mar"
-              className="h-12 w-12 object-contain rounded-full border-2 border-accent"
-            />
-            <h1 className="font-display text-2xl md:text-3xl font-bold"
-                style={{ color: '#f5e6c8' }}>
-              Marisma
-            </h1>
-          </div>
+            <div className="flex flex-col">
+              <h1 className="font-display text-xl md:text-2xl font-bold leading-tight">Marisma</h1>
+              <span className="text-xs text-accent font-light italic tracking-wide">Cocina de Mar</span>
+            </div>
+          </button>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-1">

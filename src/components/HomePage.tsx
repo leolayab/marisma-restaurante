@@ -46,15 +46,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         style={{ background: `${C.wavePattern}, ${C.headerGrad}` }}
       >
         <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="text-center">
-
-            {/* Logo */}
-            <div className="flex justify-center mb-6">
-              <img
-                src={logo}
-                alt="Marisma - Cocina de Mar"
-                className="h-40 w-40 object-contain rounded-full shadow-2xl animate-wave"
-                style={{ border: `4px solid ${C.accent}` }}
+          <div className="text-center text-white">
+            <div className="flex justify-center mb-6 animate-wave">
+              <img 
+                src="/logo.jpg" 
+                alt="Marisma Logo" 
+                className="h-24 w-24 object-contain drop-shadow-2xl rounded-full"
               />
             </div>
 
@@ -65,13 +62,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             >
               Marisma
             </h1>
-
-            {/* Tagline */}
-            <p
-              className="font-display text-2xl md:text-3xl mb-8 font-light tracking-wide italic"
-              style={{ color: 'rgba(245,230,200,0.90)' }}
-            >
-              Cocina de Mar
+            <p className="text-2xl md:text-3xl mb-8 font-light tracking-wide italic">
+              {t.home.tagline}
             </p>
 
             {/* Subtitle */}
@@ -143,45 +135,39 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           />
 
           <div className="grid md:grid-cols-3 gap-8">
-            {featureCards.map(({ icon: Icon, titleKey, descKey }) => (
-              <Card
-                key={titleKey}
-                className="p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.tealLight)}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.border)}
-              >
-                {/* Icon circle — ocean gradient */}
-                <div
-                  className="p-3 rounded-full w-fit mb-4"
-                  style={{ background: C.headerGrad }}
-                >
-                  <Icon
-                    size={48}
-                    weight="fill"
-                    className="animate-wave"
-                    style={{ color: C.accent }}
-                  />
-                </div>
+            <div className="bg-card rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow border-2 border-teal-light/20">
+              <div className="text-teal-light mb-4">
+                <Fish size={48} weight="fill" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-3 text-primary">{t.home.freshProducts}</h3>
+              <p className="text-foreground/80 leading-relaxed">
+                {t.home.freshProductsDesc}
+              </p>
+            </div>
 
-                <h3
-                  className="font-display text-2xl font-semibold mb-3"
-                  style={{ color: C.primary }}
-                >
-                  {t.home[titleKey as keyof typeof t.home] as string}
-                </h3>
+            <div className="bg-card rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow border-2 border-teal-light/20">
+              <div className="text-teal-light mb-4">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold mb-3 text-primary">{t.home.traditionalRecipes}</h3>
+              <p className="text-foreground/80 leading-relaxed">
+                {t.home.traditionalRecipesDesc}
+              </p>
+            </div>
 
-                {/* Gold mini divider */}
-                <div
-                  className="w-10 h-0.5 mb-3 rounded-full"
-                  style={{ backgroundColor: C.accent }}
-                />
-
-                <p className="leading-relaxed" style={{ color: C.mutedFg }}>
-                  {t.home[descKey as keyof typeof t.home] as string}
-                </p>
-              </Card>
-            ))}
+            <div className="bg-card rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow border-2 border-teal-light/20">
+              <div className="text-teal-light mb-4">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold mb-3 text-primary">{t.home.familyAtmosphere}</h3>
+              <p className="text-foreground/80 leading-relaxed">
+                {t.home.familyAtmosphereDesc}
+              </p>
+            </div>
           </div>
         </div>
       </section>
