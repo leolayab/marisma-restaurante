@@ -26,6 +26,7 @@ export const translations = {
       monThu: 'Lunes - Jueves',
       friSat: 'Viernes - Sábado',
       sunday: 'Domingo',
+      joinUs: 'Visítanos los fines de semana para una experiencia gastronómica especial. ¡Esperamos darte la bienvenida!',
     },
     menu: {
       title: 'Nuestro Menú',
@@ -108,6 +109,7 @@ export const translations = {
       location: 'Ubicación',
       address: 'km 7, vía Yopal - Aguazul. 150 m al costado derecho, vereda Guafilla. km 7, vía Yopal - Aguazul. 150 m al costado derecho, vereda Guafilla.',
       city: 'Yopal, Casanare, Colombia',
+      joinUs: 'Visítanos los fines de semana para una experiencia gastronómica especial. ¡Esperamos darte la bienvenida!',
       hours: 'Horarios',
       monThu: 'Lunes - Jueves: 11:00 AM - 9:00 PM',
       friSat: 'Viernes - Sábado: 11:00 AM - 10:00 PM',
@@ -148,6 +150,7 @@ export const translations = {
       monThu: 'Monday - Thursday',
       friSat: 'Friday - Saturday',
       sunday: 'Sunday',
+      joinUs: 'Join us during the weekend for a special dining experience. We look forward to welcoming you!',
     },
     menu: {
       title: 'Our Menu',
@@ -230,6 +233,7 @@ export const translations = {
       location: 'Location',
       address: 'km 7, vía Yopal - Aguazul. 150 m al costado derecho, vereda Guafilla. km 7, vía Yopal - Aguazul. 150 m al costado derecho, vereda Guafilla.',
       city: 'Yopal, Casanare, Colombia',
+      joinUs: 'Join us during the weekend for a special dining experience. We look forward to welcoming you!',
       hours: 'Hours',
       monThu: 'Monday - Thursday: 11:00 AM - 9:00 PM',
       friSat: 'Friday - Saturday: 11:00 AM - 10:00 PM',

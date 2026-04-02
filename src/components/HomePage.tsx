@@ -34,12 +34,6 @@ const featureCards = [
   { icon: Users,       titleKey: 'familyAtmosphere',    descKey: 'familyAtmosphereDesc'    },
 ]
 
-const hoursRows = [
-  { labelKey: 'monThu', hours: '11:00 AM – 9:00 PM',  border: true  },
-  { labelKey: 'friSat', hours: '11:00 AM – 10:00 PM', border: true  },
-  { labelKey: 'sunday', hours: '11:00 AM – 8:00 PM',  border: false },
-]
-
 export default function HomePage({ onNavigate }: HomePageProps) {
   const { t } = useLanguage()
 
@@ -200,18 +194,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             style={{ backgroundColor: C.card, border: `1px solid ${C.border}` }}
           >
             <div className="space-y-4 text-lg">
-              {hoursRows.map(({ labelKey, hours, border }) => (
-                <div
-                  key={labelKey}
-                  className="flex justify-between items-center pb-3"
-                  style={border ? { borderBottom: `1px solid ${C.border}` } : {}}
-                >
+              <div className="flex justify-between items-center pb-3">
                   <span className="font-semibold" style={{ color: C.primary }}>
-                    {t.home[labelKey as keyof typeof t.home] as string}
+                    {t.home.joinUs}
                   </span>
-                  <span style={{ color: C.mutedFg }}>{hours}</span>
                 </div>
-              ))}
             </div>
           </Card>
 

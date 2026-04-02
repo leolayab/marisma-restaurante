@@ -67,16 +67,9 @@ export default function Footer() {
               {t.footer.hours}
             </h4>
             <div className="space-y-3 font-body text-sm">
-              {[
-                { label: t.home.monThu, hours: '11:00 AM – 9:00 PM'  },
-                { label: t.home.friSat, hours: '11:00 AM – 10:00 PM' },
-                { label: t.home.sunday, hours: '11:00 AM – 8:00 PM'  },
-              ].map(({ label, hours }) => (
-                <div key={label} className="flex justify-between items-center">
-                  <span style={{ color: C.cream }}>{label}</span>
-                  <span style={{ color: C.creamMuted }}>{hours}</span>
-                </div>
-              ))}
+              <div className="flex justify-between items-center">
+                <span style={{ color: C.cream }}>{t.home.joinUs}</span>
+              </div>
             </div>
           </div>
 
